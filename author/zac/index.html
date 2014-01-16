@@ -137,7 +137,28 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 
 					<p class="post-meta"> by <a href="http://mebezac.github.io/author/zac/" title="Posts by zac" rel="author">zac</a> | Jan 16, 2014 | <a href="http://mebezac.github.io/category/uncategorized/" title="View all posts in Uncategorized" rel="category tag">Uncategorized</a></p>Hi Everyone, this is a sample post with some cool looking code: This is some code Ruby #Dictionary Sort Method def dictionary_sort unsorted_array, sorted_array = [] downcase_array = unsorted_array.map{|word| word.downcase} while unsorted_array.length &gt; 1...
 					</article> <!-- .et_pb_post -->
-			<div class="pagination clearfix">
+			    <script type="text/javascript">
+    // <![CDATA[
+        var disqus_shortname = 'zacgithub';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('rel'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + 'disqus.com/forums/' + disqus_shortname + '/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    //]]>
+    </script>
+<div class="pagination clearfix">
 	<div class="alignleft"></div>
 	<div class="alignright"></div>
 </div>			</div> <!-- #left-area -->

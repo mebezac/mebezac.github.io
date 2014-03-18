@@ -15,7 +15,7 @@
 <base href="http://zaccodes.com" />
 
 	<meta charset="UTF-8" />
-	<title>Using Rails Flash Messages With Ajax | Zac Clay</title>
+	<title>Finished with week 1 of Course 3 at Tealeaf Accademy | Zac Clay</title>
 			
 	
 	
@@ -58,10 +58,9 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 
  
 
-<link rel='next' title='Finished with week 1 of Course 3 at Tealeaf Accademy' href='http://zaccodes.com/finished-with-week-1-of-course-3-at-tealeaf-accademy/' />
 
-<link rel='canonical' href='http://zaccodes.com/using-rails-flash-messages-with-ajax/' />
-<link rel='shortlink' href='http://wp.me/p4fXPV-mS' />
+<link rel='canonical' href='http://zaccodes.com/finished-with-week-1-of-course-3-at-tealeaf-accademy/' />
+<link rel='shortlink' href='http://wp.me/p4fXPV-mZ' />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />	<style>
 		a { color: #7EBEC5; }
 
@@ -87,15 +86,16 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 
 <!-- Jetpack Open Graph Tags -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Using Rails Flash Messages With Ajax" />
-<meta property="og:url" content="http://zaccodes.com/using-rails-flash-messages-with-ajax/" />
-<meta property="og:description" content="Ok, so I probably spent a little too much time working &hellip;" />
-<meta property="article:published_time" content="2014-02-12T20:51:06+00:00" />
-<meta property="article:modified_time" content="2014-02-12T20:51:06+00:00" />
+<meta property="og:title" content="Finished with week 1 of Course 3 at Tealeaf Accademy" />
+<meta property="og:url" content="http://zaccodes.com/finished-with-week-1-of-course-3-at-tealeaf-accademy/" />
+<meta property="og:description" content="So it took a little longer than a week, but I have fini&hellip;" />
+<meta property="article:published_time" content="2014-03-18T17:21:05+00:00" />
+<meta property="article:modified_time" content="2014-03-18T17:21:05+00:00" />
 <meta property="article:author" content="http://zaccodes.com/author/zac/" />
 <meta property="og:site_name" content="Zac Clay" />
-<meta property="og:image" content="http://wordpress.com/i/blank.jpg" />
+<meta property="og:image" content="http://www.codeivate.com/users/mebezac/signature.jpg" />
 <meta name="twitter:site" content="@jetpack" />
+<meta name="twitter:image" content="http://www.codeivate.com/users/mebezac/signature.jpg?w=240" />
 <meta name="twitter:card" content="summary" />
 <style type="text/css" id="et-custom-css">
 #top-menu a, .et_mobile_menu a, #et_search_icon:before {
@@ -121,7 +121,7 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
     color: #999;
 }
 </style></head>
-<body class="single single-post postid-1418 single-format-standard et_right_sidebar unknown et_includes_sidebar">
+<body class="single single-post postid-1425 single-format-standard et_right_sidebar unknown et_includes_sidebar">
 	<header id="main-header">
 		<div class="container clearfix">
 					<a href="http://zaccodes.com/">
@@ -144,105 +144,41 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 		<div id="content-area" class="clearfix">
 			<div id="left-area">
 							
-				<article id="post-1418" class="post-1418 post type-post status-publish format-standard hentry category-rails et_pb_post">
-					<h1>Using Rails Flash Messages With Ajax</h1>
+				<article id="post-1425" class="post-1425 post type-post status-publish format-standard hentry category-tealeaf category-updates et_pb_post">
+					<h1>Finished with week 1 of Course 3 at Tealeaf Accademy</h1>
 
-				<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Feb 12, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a> | </p>
+				<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 18, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p>
 					<div class="entry-content">
-					<p>Ok, so I probably spent a little too much time working on this, but I really wanted to make it work and make it work on my own.</p>
-<h3>tl;dr</h3>
-<p>I wanted to have ajax flash messages instead of JavaScript alerts when a vote failed validation in a reddit-like clone. <a href="http://gist.github.com/mebezac/8944150">This</a> is basically how I did it.</p>
-<h3>What I was trying to accomplish</h3>
-<p>For class, we are building a reddit-like clone. You can see the final solution <a href="http://tl-postit.herokuapp.com/">here</a>. One of the functionalities that we were supposed to add is the ability for the user to vote on a post or comment. We were also supposed &#8216;ajaxify&#8217; the voting so that the entire page doesn&#8217;t need to be reloaded just to update a single number. That part works beautifully, as you can see in the <a href="http://tl-postit.herokuapp.com/">solution</a>. Just register and play around and you&#8217;ll see how it works. The part I didn&#8217;t like was how errors were handled (i.e. trying to vote on a post more than once.).<br />
-I wanted to add the functionality for rails&#8217; flash messages to be displayed using ajax if a vote were invalid.</p>
-<h3>How the solution does it</h3>
-<ul>
-<li>The vote being created in memory in the vote function of the <code>posts_controller</code> is saved as an instance variable (<code>@vote</code>).</li>
-<li>That <code>@vote</code> instance variable then flows through to the <code>vote.js.erb</code> view in the posts view folder.</li>
-<li>There is logic inside the <code>vote.js.erb</code> view that checks if the <code>@vote</code> object is valid</li>
-<li>That logic then displays a JavaScript alert message if the <code>@vote</code> object is invalid</li>
-</ul>
-<p>You can see all of this in action <a href="http://tl-postit.herokuapp.com/">here</a>.</p>
-<h3>Why I didn&#8217;t want to do it that way</h3>
-<ul>
-<li>For my own sake, I didn&#8217;t want to have that kind of validity checking logic and workflow in a view instead of a controller where the rest of that kind of logic is. I wanted to follow as closely as possible to the pattern in other database-hitting methods inside the controller. For example something like this:
+					<p>So it took a little longer than a week, but I have finished up the first &#8220;week&#8221; of course 3 at Tealeaf. This course focuses on Test Driven Development (TDD) and the main project is building a NetFlix clone.</p>
+<p>This first week was extremely intense, but I think it is getting me a lot closer to working how an actual developer would. To start this project, we forked a &#8220;template&#8221; repo of the NetFlix clone. All it has is a basic Rails app with the UI already built. There is a special UI controller that lets you see all of the mockups for the different pages. Your job then is to take those mockups and put working code behind them. I really, really like this approach (which I think is a pretty popular way of doing it) because I am not a professional designer by any stretch of the imagination. I can make some good looking websites, but I borrow a lot of UI elements to achieve them. I don&#8217;t normally build it completely from scratch. So, having the UI all taken care of helps me focus on what I can do from scratch, which is build a Rails app.</p>
+<p>When adding new functionality to the app, we are taking a TDD approach for this course. We are doing our tests with RSpec, which I have to say, I really enjoy. RSpec&#8217;s syntax is very clean, and makes a lot of sense to me. As a whole, TDD makes a lot of sense to me. Building the Blackjack and Reddit clone apps without automated testing has made me really appreciate it. I can just remember having to hardcode in a hand with 21 to test my Blackjack app and then going back and removing it and putting the appropriate code back. And that&#8217;s just a simple little game, I can&#8217;t imagine trying to manage all the moving parts of a full-scale app without automated testing.</p>
+<p>This week we added a few different forms to the app, including a signup and login form. This app is styled using Twitter Bootstrap 3. To make adding forms a lot easier, I used the bootstrap_form gem, which you can find here: https://github.com/bootstrap-ruby/rails-bootstrap-forms. The only issues is that the current gem version is for Bootstrap v2, so if you want the gem to work with Bootstrap 3 styles, you need to set GitHub as the source for this gem. I did that by adding this line to my Gemfile:</p>
 <p></p><!-- Crayon Syntax Highlighter v2.5.0 -->
 
-		<div id="crayon-532881cf4585e777570244" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-532881cc2a1f0384172216" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
 		
-			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Gemfile</span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
 			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
-def update
-  if @post.update(post_params)
-    flash[:notice] = "Your post was updated!"
-    redirect_to post_path
-  else
-    render :edit
-  end 
-end
-</textarea></div>
+gem 'bootstrap_form', :git =&gt; "git://github.com/bootstrap-ruby/rails-bootstrap-forms"</textarea></div>
 			<div class="crayon-main" style="">
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-532881cf4585e777570244-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-532881cf4585e777570244-2">2</div><div class="crayon-num" data-line="crayon-532881cf4585e777570244-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-532881cf4585e777570244-4">4</div><div class="crayon-num" data-line="crayon-532881cf4585e777570244-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-532881cf4585e777570244-6">6</div><div class="crayon-num" data-line="crayon-532881cf4585e777570244-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-532881cf4585e777570244-8">8</div><div class="crayon-num" data-line="crayon-532881cf4585e777570244-9">9</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-532881cc2a1f0384172216-1">1</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-532881cf4585e777570244-1"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-i">update</span></div><div class="crayon-line crayon-striped-line" id="crayon-532881cf4585e777570244-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">@post</span><span class="crayon-sy">.</span><span class="crayon-e">update</span><span class="crayon-sy">(</span><span class="crayon-i">post_params</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-532881cf4585e777570244-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">flash</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-i">notice</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Your post was updated!"</span></div><div class="crayon-line crayon-striped-line" id="crayon-532881cf4585e777570244-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">redirect_to</span><span class="crayon-h"> </span><span class="crayon-i">post_path</span></div><div class="crayon-line" id="crayon-532881cf4585e777570244-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">else</span></div><div class="crayon-line crayon-striped-line" id="crayon-532881cf4585e777570244-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">render</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">edit</span></div><div class="crayon-line" id="crayon-532881cf4585e777570244-7"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-532881cf4585e777570244-8"><span class="crayon-st">end</span></div><div class="crayon-line" id="crayon-532881cf4585e777570244-9">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-532881cc2a1f0384172216-1"><span class="crayon-i">gem</span><span class="crayon-h"> </span><span class="crayon-s">'bootstrap_form'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-v">git</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-s">"git://github.com/bootstrap-ruby/rails-bootstrap-forms"</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0060 seconds] -->
-<p></li>
-<li>I didn&#8217;t want to use flash messages for some errors/messages and JavaScript alerts for others, I wanted to be consistent.</p>
-</li>
-<li>I wanted <code>vote</code> to be a local variable to the vote method, not an instance variable that I could accidentally mess up somewhere else.</li>
-<li>
-<p>I wanted my <code>vote.js.erb</code> view file to be as clean as possible (It&#8217;s actually just 2 lines)</p>
-<p></p><!-- Crayon Syntax Highlighter v2.5.0 -->
-
-		<div id="crayon-532881cf4586f353604782" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
-		
-			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
-			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
-			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
-			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
-$("#post_&amp;lt;%= @post.id %&amp;gt;_votes").html("&amp;lt;%= @post.total_votes %&amp;gt;");
-&amp;lt;%= ajax_flash('#top-div') %&amp;gt;
-</textarea></div>
-			<div class="crayon-main" style="">
-				<table class="crayon-table">
-					<tr class="crayon-row">
-				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-532881cf4586f353604782-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-532881cf4586f353604782-2">2</div><div class="crayon-num" data-line="crayon-532881cf4586f353604782-3">3</div></div>
-				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-532881cf4586f353604782-1"><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">"#post_&amp;lt;%= @post.id %&amp;gt;_votes"</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">html</span><span class="crayon-sy">(</span><span class="crayon-s">"&amp;lt;%= @post.total_votes %&amp;gt;"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-532881cf4586f353604782-2"><span class="crayon-v">&amp;lt</span><span class="crayon-sy">;</span><span class="crayon-o">%=</span><span class="crayon-h"> </span><span class="crayon-e">ajax_flash</span><span class="crayon-sy">(</span><span class="crayon-s">'#top-div'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-v">&amp;gt</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-532881cf4586f353604782-3">&nbsp;</div></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-<!-- [Format Time: 0.0013 seconds] -->
-<p></li>
-</ul>
-<h3>The way I did it</h3>
-<p>So after a lot (I mean a LOT) of trial and error, the best way I could come up with was to create a helper method called <code>ajax_flash</code>. Basically what this method does is inject the same alert div that is injected in the template from rendering the <code>_messages.html.erb</code> partial. It takes the flash message and determines the correct div to put it in. The method itself returns ajax code that does 2 things:</p>
-<ol>
-<li>Clears out the previous ajax flash message so the user can&#8217;t get a huge endless list of messages.</p>
-</li>
-<li>
-<p>Injects the current, relevant message as the first child element of the div you specify.</p>
-</li>
-</ol>
-<p>If you&#8217;re more interested in exactly how I got it to work, the relevant code is in a <a href="https://gist.github.com/mebezac/8944150">gist here</a></p>
-<h3>How the method it is used</h3>
-<p>I call the method like this inside my <code>vote.js.erb</code> view:<br />
-<code>&lt;%= ajax_flash('#top-div') %&gt;</code></p>
-<p>The method takes one argument, <code>div_id</code> which needs to be a string. You <em>could</em> pass a class like this <code>&lt;%= ajax_flash('.some-class') %&gt;</code> if you really wanted, but you should be passing a <code>div_id</code> into it if you want it to work correctly.</p>
-<p>The <code>div_id</code> is the id of the div that you want to inject the message into as the first child element. In this project, it was a div with a class of <code>"span12"</code> from twitter bootstrap that I latched onto. Just put some unique id in the div that contains the rendering of your message partial in your application layout file. Again, to see how I did that, take a look at <a href="https://gist.github.com/mebezac/8944150">this gist</a></p>
-<h3>Overall</h3>
-<p>I am very pleased with how it works and I think it fits into the project much more seamlessly than JavaScript alert messages and helps me keep the code more organized.</p>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<p>Figuring that out was actually what took the most time this week. Building the app up and implementing new features in a TDD way was relatively easy, but getting the styling to match perfectly to the pre-made UI took some extra work. Going through that though forced me to dig deep into Rails&#8217; form helpers to figure out what was going on behind the scenes. It helped demystify some of that &#8220;Rails magic&#8221; for me.</p>
+<p>For this course, I have also switched over completely to a Linux environment, instead of running a virtual machine on my Windows laptop. I went with <a href="http://www.linuxmint.com/" target="_blank">Linux Mint</a> running the Cinnamon desktop. I am really liking it. Also, since I was setting up a new development machine, I used rbenv as my ruby version manager, instead of RVM. I really like rbenv, it seems cleaner and more intuitive than RVM to me. For me, RVM always seemed a little hacky and overfilled with features that I never used.</p>
+<p>I&#8217;ve also started tracking my coding using <a href="http://www.codeivate.com/" target="_blank">codeivate</a> which is a pretty awesome plugin for Sublime Text that tracks when you&#8217;re programming, what language you&#8217;re using, and a bunch of other stuff. You can check my profile out here:</p>
+<p><a href="http://www.codeivate.com/users/mebezac" target="_blank"><img alt="" src="http://www.codeivate.com/users/mebezac/signature.jpg" /></a></p>
 					</div> <!-- .entry-content -->
 
 					
@@ -252,12 +188,12 @@ $("#post_&amp;lt;%= @post.id %&amp;gt;_votes").html("&amp;lt;%= @post.total_vote
 
 <script type="text/javascript">
 /* <![CDATA[ */
-    var disqus_url = 'http://zaccodes.com/using-rails-flash-messages-with-ajax/';
-    var disqus_identifier = '1418 http://zaccodes.com/?p=1418';
+    var disqus_url = 'http://zaccodes.com/finished-with-week-1-of-course-3-at-tealeaf-accademy/';
+    var disqus_identifier = '1425 http://zaccodes.com/?p=1425';
     var disqus_container_id = 'disqus_thread';
     var disqus_domain = 'disqus.com';
     var disqus_shortname = 'zacgithub';
-    var disqus_title = "Using Rails Flash Messages With Ajax";
+    var disqus_title = "Finished with week 1 of Course 3 at Tealeaf Accademy";
         var disqus_config = function () {
         var config = this; // Access to the config object
         config.language = '';
@@ -279,7 +215,7 @@ $("#post_&amp;lt;%= @post.id %&amp;gt;_votes").html("&amp;lt;%= @post.total_vote
             // sync comments in the background so we don't block the page
             var script = document.createElement('script');
             script.async = true;
-            script.src = '?cf_action=sync_comments&post_id=1418';
+            script.src = '?cf_action=sync_comments&post_id=1425';
 
             var firstScript = document.getElementsByTagName( "script" )[0];
             firstScript.parentNode.insertBefore(script, firstScript);
@@ -293,7 +229,7 @@ $("#post_&amp;lt;%= @post.id %&amp;gt;_votes").html("&amp;lt;%= @post.total_vote
     var DsqLocal = {
         'trackbacks': [
         ],
-        'trackback_url': "http:\/\/websites.ols18.com\/zactealeaf\/using-rails-flash-messages-with-ajax\/trackback\/"    };
+        'trackback_url': "http:\/\/websites.ols18.com\/zactealeaf\/finished-with-week-1-of-course-3-at-tealeaf-accademy\/trackback\/"    };
 /* ]]> */
 </script>
 
@@ -353,8 +289,8 @@ var et_custom = {"ajaxurl":"http:\/\/websites.ols18.com\/zactealeaf\/wp-admin\/a
 
 	<script src="http://stats.wordpress.com/e-201412.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	st_go({v:'ext',j:'1:2.9.2',blog:'62910279',post:'1418',tz:'-4'});
-	var load_cmc = function(){linktracker_init(62910279,1418,2);};
+	st_go({v:'ext',j:'1:2.9.2',blog:'62910279',post:'1425',tz:'-4'});
+	var load_cmc = function(){linktracker_init(62910279,1425,2);};
 	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
 	else load_cmc();
 	</script></body>

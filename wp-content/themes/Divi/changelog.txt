@@ -1,3 +1,14 @@
+version 1.9 ( updated 04-17-2014 )
+- Corrected js files version number
+	* et-pagebuilder/et-pagebuilder.php
+- Bumped version number
+	* style.css
+
+version 1.8 ( updated 04-15-2014 )
+- The theme is compatible with WordPress 3.9 now
+	* et-pagebuilder/js/admin.js
+	* et-pagebuilder/css/style.css
+
 version 1.7 ( updated 03-06-2014 )
 - Fixed the issue with Blog and Portfolio modules pagination on static frontpage
 - Fixed the issue with video background in a section, overlaying any content within the section

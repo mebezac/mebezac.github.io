@@ -2140,7 +2140,7 @@ var ET_PageBuilder = ET_PageBuilder || {};
 
 		function et_pb_tinymce_remove_control( textarea_id ) {
 			if ( typeof window.tinyMCE !== 'undefined' ) {
-				window.tinyMCE.execCommand( 'mceRemoveControl', false, textarea_id );
+				window.tinyMCE.execCommand( 'mceRemoveEditor', false, textarea_id );
 
 				if ( typeof window.tinyMCE.get( textarea_id ) !== 'undefined' ) {
 					window.tinyMCE.remove( '#' + textarea_id );

@@ -1,3 +1,9 @@
+version 1.9.1 ( updated 04-21-2014 )
+- Fixed Page Builder issues in IE9 and IE10
+	* et-pagebuilder/js/admin.js
+- Bumped version number
+	* style.css
+
 version 1.9 ( updated 04-17-2014 )
 - Corrected js files version number
 	* et-pagebuilder/et-pagebuilder.php

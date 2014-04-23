@@ -29,14 +29,13 @@
 	</script>
 
 	<meta name='robots' content='noindex,follow' />
-<script type="text/javascript">var trackerAjaxUrl="http://zaccodes.com/wp-admin/admin-ajax.php";var trackerNonce="3809af7a99";</script>
+<script type="text/javascript">var trackerAjaxUrl="http://zaccodes.com/wp-admin/admin-ajax.php";var trackerNonce="2a37b257c9";</script>
 
 
 <meta content="Zac Codes v.1.0.0" name="generator"/><link rel='stylesheet' id='jetpack-subscriptions-css'  href='http://zaccodes.com/wp-content/plugins/jetpack/modules/subscriptions/subscriptions.css?ver=3.9' type='text/css' media='all' />
 <link rel='stylesheet' id='crayon-css'  href='http://zaccodes.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=2.6.0' type='text/css' media='all' />
 <link rel='stylesheet' id='crayon-theme-cg-cookie-css'  href='http://zaccodes.com/wp-content/plugins/crayon-syntax-highlighter/themes/cg-cookie/cg-cookie.css?ver=2.6.0' type='text/css' media='all' />
 <link rel='stylesheet' id='crayon-font-monaco-css'  href='http://zaccodes.com/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=2.6.0' type='text/css' media='all' />
-<link rel='stylesheet' id='xagithub_css-css'  href='http://zaccodes.com/wp-content/plugins/wp-xagithub-activity/css/wp-xagithub.css?ver=3.9' type='text/css' media='all' />
 <link rel='stylesheet' id='jetpack-widgets-css'  href='http://zaccodes.com/wp-content/plugins/jetpack/modules/widgets/widgets.css?ver=20121003' type='text/css' media='all' />
 <link rel='stylesheet' id='divi-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,700,800|Raleway:400,200,100,500,700,800,900&#038;subset=latin,latin-ext' type='text/css' media='all' />
 <link rel='stylesheet' id='et-gf-francois-one-css'  href='http://fonts.googleapis.com/css?family=Francois+One:400&#038;subset=latin,latin-ext' type='text/css' media='all' />
@@ -138,12 +137,167 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 		<div id="content-area" class="clearfix">
 			<div id="left-area">
 		
+					<article id="post-1439" class="post-1439 post type-post status-publish format-standard hentry category-tealeaf category-updates et_pb_post">
+
+				
+						<h2><a href="http://zaccodes.com/done-with-week-4-of-course-3-at-tealeaf-academy/">Done With Week 4 of Course 3 at Tealeaf Academy</a></h2>
+
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 27, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p><p>We covered a whole lot this week, I learned quite a few new things. A few things stood out however.</p>
+<h3 id="testing-non-standard-models-with-shoulda-matchers-in-rspec">Testing non-standard models with Shoulda matchers in RSpec</h3>
+<p>So this week we added some social networking features. We added the ability for users to follow other users. So one user is a follower and the other user is the leader in the way we set it up. To accomplish this we set up a <code>Relationship</code> model to keep track of these leader/follower relationships. This is what that model looks like:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf5614bc0098122560" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+class Relationship &amp;lt; ActiveRecord::Base
+  belongs_to :follower, class_name: "User"
+  belongs_to :leader, class_name: "User"
+
+  validates_uniqueness_of :follower_id, scope: [:leader_id]
+end 
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf5614bc0098122560-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bc0098122560-2">2</div><div class="crayon-num" data-line="crayon-5357bf5614bc0098122560-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bc0098122560-4">4</div><div class="crayon-num" data-line="crayon-5357bf5614bc0098122560-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bc0098122560-6">6</div><div class="crayon-num" data-line="crayon-5357bf5614bc0098122560-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf5614bc0098122560-1"><span class="crayon-r">class</span><span class="crayon-h"> </span><span class="crayon-i">Relationship</span><span class="crayon-h"> </span><span class="crayon-v">&amp;lt</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-i">ActiveRecord</span><span class="crayon-o">::</span><span class="crayon-i">Base</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bc0098122560-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">belongs_to</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">follower</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"User"</span></div><div class="crayon-line" id="crayon-5357bf5614bc0098122560-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">belongs_to</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">leader</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"User"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bc0098122560-4">&nbsp;</div><div class="crayon-line" id="crayon-5357bf5614bc0098122560-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">validates_uniqueness_of</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">follower_id</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">scope</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-i">leader_id</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bc0098122560-6"><span class="crayon-st">end</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5357bf5614bc0098122560-7">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0055 seconds] -->
+<p></p>
+<p>The user model then needed these lines to get the connection set up:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf5614bcf907728795" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+has_many :following_relationships, class_name: "Relationship", foreign_key: :follower_id
+has_many :leading_relationships, class_name: "Relationship", foreign_key: :leader_id
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf5614bcf907728795-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bcf907728795-2">2</div><div class="crayon-num" data-line="crayon-5357bf5614bcf907728795-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf5614bcf907728795-1"><span class="crayon-i">has_many</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">following_relationships</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"Relationship"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">foreign_key</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">follower_id</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bcf907728795-2"><span class="crayon-i">has_many</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">leading_relationships</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"Relationship"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">foreign_key</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">leader_id</span></div><div class="crayon-line" id="crayon-5357bf5614bcf907728795-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p></p>
+<p>I had to dig around a bit in the excellent Shoulda <a href="https://github.com/thoughtbot/shoulda-matchers#readme">README</a> to figure out how to test these models that don&#8217;t really fit the default Rails behavior.</p>
+<p>Here is my spec for the Relationships model</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf5614bd7767605885" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+require 'spec_helper'
+
+describe Relationship do
+  it { should belong_to(:follower).class_name('User') }
+  it { should belong_to(:leader).class_name('User') }
+  it { should validate_uniqueness_of(:follower_id).scoped_to(:leader_id) }
+end
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf5614bd7767605885-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bd7767605885-2">2</div><div class="crayon-num" data-line="crayon-5357bf5614bd7767605885-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bd7767605885-4">4</div><div class="crayon-num" data-line="crayon-5357bf5614bd7767605885-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bd7767605885-6">6</div><div class="crayon-num" data-line="crayon-5357bf5614bd7767605885-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bd7767605885-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf5614bd7767605885-1"><span class="crayon-i">require</span><span class="crayon-h"> </span><span class="crayon-s">'spec_helper'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bd7767605885-2">&nbsp;</div><div class="crayon-line" id="crayon-5357bf5614bd7767605885-3"><span class="crayon-i">describe</span><span class="crayon-h"> </span><span class="crayon-i">Relationship</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bd7767605885-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">it</span><span class="crayon-h"> </span><span class="crayon-k ">{</span><span class="crayon-h"> </span><span class="crayon-i">should</span><span class="crayon-h"> </span><span class="crayon-e">belong_to</span><span class="crayon-sy">(</span><span class="crayon-o">:</span><span class="crayon-i">follower</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-sy">(</span><span class="crayon-s">'User'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-k ">}</span></div><div class="crayon-line" id="crayon-5357bf5614bd7767605885-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">it</span><span class="crayon-h"> </span><span class="crayon-k ">{</span><span class="crayon-h"> </span><span class="crayon-i">should</span><span class="crayon-h"> </span><span class="crayon-e">belong_to</span><span class="crayon-sy">(</span><span class="crayon-o">:</span><span class="crayon-i">leader</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-sy">(</span><span class="crayon-s">'User'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-k ">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bd7767605885-6"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">it</span><span class="crayon-h"> </span><span class="crayon-k ">{</span><span class="crayon-h"> </span><span class="crayon-i">should</span><span class="crayon-h"> </span><span class="crayon-e">validate_uniqueness_of</span><span class="crayon-sy">(</span><span class="crayon-o">:</span><span class="crayon-i">follower_id</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">scoped_to</span><span class="crayon-sy">(</span><span class="crayon-o">:</span><span class="crayon-i">leader_id</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-k ">}</span></div><div class="crayon-line" id="crayon-5357bf5614bd7767605885-7"><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bd7767605885-8">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0029 seconds] -->
+<p></p>
+<p>And the relevant parts of my User Model spec:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf5614bdd052910841" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+it { should have_many(:following_relationships).class_name("Relationship").with_foreign_key('follower_id') }
+it { should have_many(:leading_relationships).class_name("Relationship").with_foreign_key('leader_id') }
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf5614bdd052910841-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614bdd052910841-2">2</div><div class="crayon-num" data-line="crayon-5357bf5614bdd052910841-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf5614bdd052910841-1"><span class="crayon-i">it</span><span class="crayon-h"> </span><span class="crayon-k ">{</span><span class="crayon-h"> </span><span class="crayon-i">should</span><span class="crayon-h"> </span><span class="crayon-e">have_many</span><span class="crayon-sy">(</span><span class="crayon-o">:</span><span class="crayon-i">following_relationships</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-sy">(</span><span class="crayon-s">"Relationship"</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">with_foreign_key</span><span class="crayon-sy">(</span><span class="crayon-s">'follower_id'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-k ">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614bdd052910841-2"><span class="crayon-i">it</span><span class="crayon-h"> </span><span class="crayon-k ">{</span><span class="crayon-h"> </span><span class="crayon-i">should</span><span class="crayon-h"> </span><span class="crayon-e">have_many</span><span class="crayon-sy">(</span><span class="crayon-o">:</span><span class="crayon-i">leading_relationships</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-r">class</span><span class="crayon-sy">_</span>name<span class="crayon-sy">(</span><span class="crayon-s">"Relationship"</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">with_foreign_key</span><span class="crayon-sy">(</span><span class="crayon-s">'leader_id'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-k ">}</span></div><div class="crayon-line" id="crayon-5357bf5614bdd052910841-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0021 seconds] -->
+<p></p>
+<p>So, this week really got me to dive deeper into Rails models. How they work, and how to properly test them.</p>
+<h3 id="set-host-in-test-environment-config-for-mail-tests">Set host in test environment config for mail tests</h3>
+<p>This week we also got introduced to mailers and how to test them. Most of it was straight-forward. However, a source of frustration for me involved urls in the email view templates.</p>
+<p>In order to point a link in an email to your site, you have to specify the host. The way we did this in our development environment was to add this line to the config/environments/development.rb file:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf5614be4929779270" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+config.action_mailer.default_url_options = { host: 'localhost:3000' }
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf5614be4929779270-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf5614be4929779270-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf5614be4929779270-1"><span class="crayon-v">config</span><span class="crayon-sy">.</span><span class="crayon-v">action_mailer</span><span class="crayon-sy">.</span><span class="crayon-r">def</span><span class="crayon-v">ault_url_options</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-k ">{</span><span class="crayon-h"> </span><span class="crayon-i">host</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'localhost:3000'</span><span class="crayon-h"> </span><span class="crayon-k ">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf5614be4929779270-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>That works great for playing around with the UI, but when I was trying to run tests I kept getting errors telling me to specify a host. The problem is that you need to add that line to the config/environments/test.rb file as well. This is pretty obvious looking back, but it took me a little while to figure that out, so if anyone else runs into that issue, that&#8217;s how you fix it :).</p>
+<h3 id="resetting-the-password">Resetting the password</h3>
+<p>This week we also learned how to implement a pretty advanced feature, allowing the user to reset their password. It was really awesome to learn how to implement something like this. Everyday I am getting more and more confident in my ability to build a full-fledged production-quality app.</p>
+
+					</article> <!-- .et_pb_post -->
+			
 					<article id="post-1435" class="post-1435 post type-post status-publish format-standard hentry category-tealeaf category-updates et_pb_post">
 
 				
 						<h2><a href="http://zaccodes.com/finished-week-3-of-course-3-at-tealeaf-academy/">Finished Week 3 of Course 3 at Tealeaf Academy</a></h2>
 
-					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 26, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p>The first part of this week basically dealt with refactoring RSpec code by using macros and shared examples. These are really helpful because common things like checking to make sure an unauthenticated user is redirected to the sign in page if they try to do an action...
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 26, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p><p>The first part of this week basically dealt with refactoring RSpec code by using macros and shared examples. These are really helpful because common things like checking to make sure an unauthenticated user is redirected to the sign in page if they try to do an action that requires them to be logged in can be extracted out to a single shared example. This means if for any reason down the road if you need to change the behavior of what happens when an unauthenticated user tries to perform a privileged action, you only need to change that shared example instead of having to go and change it in all of your test files.</p>
+<p>The second half of the week, we got into doing feature specs using Capybara. This is basically testing the actions of an actual user clicking around on your UI and performing the actions of a real user. This is important because it allows you to test the integration of you code at a higher level than just the model and controller levels. This allows to test basically real world behaviors.</p>
+<p>Doing feature specs will take a little getting used to for me, but I think I am getting the hang of it. The biggest thing for me to get used to is the fact that you do multiple things all within one 
+			<span id="crayon-5357bf561aaaf711818253" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">scenario</span></span></span> block, where in the model and controller specs, you separate just about every action and permutation into it&#8217;s own test.</p>
+<p>Feature specs are a whole different kind of testing though. So, I just need to get used to switching context from testing the small units to testing everything together the way a user would use it. I&#8217;m definitely starting to get my head around this TDD thing now though!</p>
+
 					</article> <!-- .et_pb_post -->
 			
 					<article id="post-1432" class="post-1432 post type-post status-publish format-standard hentry category-tealeaf et_pb_post">
@@ -151,7 +305,39 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 				
 						<h2><a href="http://zaccodes.com/finished-week-2-of-course-3-at-tealeaf-academy/">Finished Week 2 of Course 3 at Tealeaf Academy</a></h2>
 
-					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 22, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a> | </p>This week was really great for me. I think I am really starting to get the hang of the testing process and test driven design. In the first week and for most the of the first half of this week, I had to kind of hobble along, not writing much code before taking a look...
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 22, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a> | </p><p>This week was really great for me. I think I am really starting to get the hang of the testing process and test driven design. In the first week and for most the of the first half of this week, I had to kind of hobble along, not writing much code before taking a look at the solution videos. I had an idea of what I needed to do, but I didn&#8217;t really know exactly how to do it.</p>
+<p>The second half of this week is when things really started to click. I was able to look at the assignment, and start implementing the features using TDD before watching the solution videos. Most of the time what I did was really close to how the solutions did it, or accomplished the same goal in a different way.</p>
+<p>It wasn&#8217;t perfect, I still picked up some new tricks this week. The thing that I learned that I liked the most was the idea of delegation on the model. This allows you to basically delegate attributes to an associated models. The example in our code is in the QueueItem model.</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf561ae3a890778818" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Rails Delegation</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+delegate :categories, to: :video
+delegate :title, to: :video, prefix: :video</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf561ae3a890778818-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf561ae3a890778818-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf561ae3a890778818-1"><span class="crayon-i">delegate</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">categories</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">to</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">video</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf561ae3a890778818-2"><span class="crayon-i">delegate</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">title</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">to</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">video</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">prefix</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">video</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0014 seconds] -->
+<p></p>
+<p>So each queue item has an associated video. On the UI, we wanted to show the title for the video associated with a queue item. We could have called something like 
+			<span id="crayon-5357bf561ae45733406122" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">queue_item</span><span class="crayon-sy">.</span><span class="crayon-v">video</span><span class="crayon-sy">.</span><span class="crayon-i">title</span></span></span> but we wanted it to be a little cleaner and readable. So, we wanted to be able to call something like this: 
+			<span id="crayon-5357bf561ae4c827446839" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">queue_item</span><span class="crayon-sy">.</span><span class="crayon-i">title</span></span></span>. Before this week, I would just write a method on the model to return the title for the video. However, delegation lets you tell rails that when you call 
+			<span id="crayon-5357bf561ae52753975041" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">queue_item</span><span class="crayon-sy">.</span><span class="crayon-i">title</span></span></span> what you really mean is: &#8220;The title attribute belongs to video associated with a queue item. So, whenever I call 
+			<span id="crayon-5357bf561ae58803417059" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">queue_item</span><span class="crayon-sy">.</span><span class="crayon-i">title</span></span></span> what I really mean is 
+			<span id="crayon-5357bf561ae5e362007387" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">queue_item</span><span class="crayon-sy">.</span><span class="crayon-v">video</span><span class="crayon-sy">.</span><span class="crayon-i">title</span></span></span>.&#8221; I really like this feature, and I&#8217;m definitely going to use it in my future projects.</p>
+
 					</article> <!-- .et_pb_post -->
 			
 					<article id="post-1425" class="post-1425 post type-post status-publish format-standard hentry category-tealeaf category-updates et_pb_post">
@@ -159,7 +345,37 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 				
 						<h2><a href="http://zaccodes.com/finished-with-week-1-of-course-3-at-tealeaf-accademy/">Finished with week 1 of Course 3 at Tealeaf Accademy</a></h2>
 
-					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 18, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p>So it took a little longer than a week, but I have finished up the first &#8220;week&#8221; of course 3 at Tealeaf. This course focuses on Test Driven Development (TDD) and the main project is building a NetFlix clone. This first week was extremely intense, but I...
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Mar 18, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p><p>So it took a little longer than a week, but I have finished up the first &#8220;week&#8221; of course 3 at Tealeaf. This course focuses on Test Driven Development (TDD) and the main project is building a NetFlix clone.</p>
+<p>This first week was extremely intense, but I think it is getting me a lot closer to working how an actual developer would. To start this project, we forked a &#8220;template&#8221; repo of the NetFlix clone. All it has is a basic Rails app with the UI already built. There is a special UI controller that lets you see all of the mockups for the different pages. Your job then is to take those mockups and put working code behind them. I really, really like this approach (which I think is a pretty popular way of doing it) because I am not a professional designer by any stretch of the imagination. I can make some good looking websites, but I borrow a lot of UI elements to achieve them. I don&#8217;t normally build it completely from scratch. So, having the UI all taken care of helps me focus on what I can do from scratch, which is build a Rails app.</p>
+<p>When adding new functionality to the app, we are taking a TDD approach for this course. We are doing our tests with RSpec, which I have to say, I really enjoy. RSpec&#8217;s syntax is very clean, and makes a lot of sense to me. As a whole, TDD makes a lot of sense to me. Building the Blackjack and Reddit clone apps without automated testing has made me really appreciate it. I can just remember having to hardcode in a hand with 21 to test my Blackjack app and then going back and removing it and putting the appropriate code back. And that&#8217;s just a simple little game, I can&#8217;t imagine trying to manage all the moving parts of a full-scale app without automated testing.</p>
+<p>This week we added a few different forms to the app, including a signup and login form. This app is styled using Twitter Bootstrap 3. To make adding forms a lot easier, I used the bootstrap_form gem, which you can find here: https://github.com/bootstrap-ruby/rails-bootstrap-forms. The only issues is that the current gem version is for Bootstrap v2, so if you want the gem to work with Bootstrap 3 styles, you need to set GitHub as the source for this gem. I did that by adding this line to my Gemfile:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf561b3f6002810662" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Gemfile</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+gem 'bootstrap_form', :git =&gt; "git://github.com/bootstrap-ruby/rails-bootstrap-forms"</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf561b3f6002810662-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf561b3f6002810662-1"><span class="crayon-i">gem</span><span class="crayon-h"> </span><span class="crayon-s">'bootstrap_form'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-v">git</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-s">"git://github.com/bootstrap-ruby/rails-bootstrap-forms"</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>Figuring that out was actually what took the most time this week. Building the app up and implementing new features in a TDD way was relatively easy, but getting the styling to match perfectly to the pre-made UI took some extra work. Going through that though forced me to dig deep into Rails&#8217; form helpers to figure out what was going on behind the scenes. It helped demystify some of that &#8220;Rails magic&#8221; for me.</p>
+<p>For this course, I have also switched over completely to a Linux environment, instead of running a virtual machine on my Windows laptop. I went with <a href="http://www.linuxmint.com/" target="_blank">Linux Mint</a> running the Cinnamon desktop. I am really liking it. Also, since I was setting up a new development machine, I used rbenv as my ruby version manager, instead of RVM. I really like rbenv, it seems cleaner and more intuitive than RVM to me. For me, RVM always seemed a little hacky and overfilled with features that I never used.</p>
+<p>I&#8217;ve also started tracking my coding using <a href="http://www.codeivate.com/" target="_blank">codeivate</a> which is a pretty awesome plugin for Sublime Text that tracks when you&#8217;re programming, what language you&#8217;re using, and a bunch of other stuff. You can check my profile out here:</p>
+<p><a href="http://www.codeivate.com/users/mebezac" target="_blank"><img alt="" src="http://www.codeivate.com/users/mebezac/signature.jpg" /></a></p>
+
 					</article> <!-- .et_pb_post -->
 			
 					<article id="post-1418" class="post-1418 post type-post status-publish format-standard hentry category-rails et_pb_post">
@@ -167,15 +383,101 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 				
 						<h2><a href="http://zaccodes.com/using-rails-flash-messages-with-ajax/">Using Rails Flash Messages With Ajax</a></h2>
 
-					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Feb 12, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a> | </p>Ok, so I probably spent a little too much time working on this, but I really wanted to make it work and make it work on my own. tl;dr I wanted to have ajax flash messages instead of JavaScript alerts when a vote failed validation in a reddit-like clone. This is...
-					</article> <!-- .et_pb_post -->
-			
-					<article id="post-1412" class="post-1412 post type-post status-publish format-standard hentry category-tealeaf category-updates et_pb_post">
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Feb 12, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a> | </p><p>Ok, so I probably spent a little too much time working on this, but I really wanted to make it work and make it work on my own.</p>
+<h3>tl;dr</h3>
+<p>I wanted to have ajax flash messages instead of JavaScript alerts when a vote failed validation in a reddit-like clone. <a href="http://gist.github.com/mebezac/8944150">This</a> is basically how I did it.</p>
+<h3>What I was trying to accomplish</h3>
+<p>For class, we are building a reddit-like clone. You can see the final solution <a href="http://tl-postit.herokuapp.com/">here</a>. One of the functionalities that we were supposed to add is the ability for the user to vote on a post or comment. We were also supposed &#8216;ajaxify&#8217; the voting so that the entire page doesn&#8217;t need to be reloaded just to update a single number. That part works beautifully, as you can see in the <a href="http://tl-postit.herokuapp.com/">solution</a>. Just register and play around and you&#8217;ll see how it works. The part I didn&#8217;t like was how errors were handled (i.e. trying to vote on a post more than once.).<br />
+I wanted to add the functionality for rails&#8217; flash messages to be displayed using ajax if a vote were invalid.</p>
+<h3>How the solution does it</h3>
+<ul>
+<li>The vote being created in memory in the vote function of the <code>posts_controller</code> is saved as an instance variable (<code>@vote</code>).</li>
+<li>That <code>@vote</code> instance variable then flows through to the <code>vote.js.erb</code> view in the posts view folder.</li>
+<li>There is logic inside the <code>vote.js.erb</code> view that checks if the <code>@vote</code> object is valid</li>
+<li>That logic then displays a JavaScript alert message if the <code>@vote</code> object is invalid</li>
+</ul>
+<p>You can see all of this in action <a href="http://tl-postit.herokuapp.com/">here</a>.</p>
+<h3>Why I didn&#8217;t want to do it that way</h3>
+<ul>
+<li>For my own sake, I didn&#8217;t want to have that kind of validity checking logic and workflow in a view instead of a controller where the rest of that kind of logic is. I wanted to follow as closely as possible to the pattern in other database-hitting methods inside the controller. For example something like this:
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
 
-				
-						<h2><a href="http://zaccodes.com/week-4-completely-done-ajax-ing-it-up-github-branches-etc/">Week 4 Completely Done, ajax-ing it up, github branches, etc.</a></h2>
+		<div id="crayon-5357bf561b873590987756" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+def update
+  if @post.update(post_params)
+    flash[:notice] = "Your post was updated!"
+    redirect_to post_path
+  else
+    render :edit
+  end 
+end
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf561b873590987756-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf561b873590987756-2">2</div><div class="crayon-num" data-line="crayon-5357bf561b873590987756-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf561b873590987756-4">4</div><div class="crayon-num" data-line="crayon-5357bf561b873590987756-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf561b873590987756-6">6</div><div class="crayon-num" data-line="crayon-5357bf561b873590987756-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf561b873590987756-8">8</div><div class="crayon-num" data-line="crayon-5357bf561b873590987756-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf561b873590987756-1"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-i">update</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf561b873590987756-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">@post</span><span class="crayon-sy">.</span><span class="crayon-e">update</span><span class="crayon-sy">(</span><span class="crayon-i">post_params</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5357bf561b873590987756-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">flash</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-i">notice</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Your post was updated!"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf561b873590987756-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">redirect_to</span><span class="crayon-h"> </span><span class="crayon-i">post_path</span></div><div class="crayon-line" id="crayon-5357bf561b873590987756-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">else</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf561b873590987756-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">render</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">edit</span></div><div class="crayon-line" id="crayon-5357bf561b873590987756-7"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf561b873590987756-8"><span class="crayon-st">end</span></div><div class="crayon-line" id="crayon-5357bf561b873590987756-9">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0017 seconds] -->
+<p></li>
+<li>I didn&#8217;t want to use flash messages for some errors/messages and JavaScript alerts for others, I wanted to be consistent.</p>
+</li>
+<li>I wanted <code>vote</code> to be a local variable to the vote method, not an instance variable that I could accidentally mess up somewhere else.</li>
+<li>
+<p>I wanted my <code>vote.js.erb</code> view file to be as clean as possible (It&#8217;s actually just 2 lines)</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
 
-					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Jan 25, 2014 | <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p>So I&#8217;m completely done with the fourth and final week of the first Tealeaf session: Introduction to Ruby and Web Development. I think I can honestly say that I have learned more this month than in all of the previous months trying to learn on my own. Tealeaf is...
+		<div id="crayon-5357bf561b881190103835" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+$("#post_&amp;lt;%= @post.id %&amp;gt;_votes").html("&amp;lt;%= @post.total_votes %&amp;gt;");
+&amp;lt;%= ajax_flash('#top-div') %&amp;gt;
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf561b881190103835-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf561b881190103835-2">2</div><div class="crayon-num" data-line="crayon-5357bf561b881190103835-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf561b881190103835-1"><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">"#post_&amp;lt;%= @post.id %&amp;gt;_votes"</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">html</span><span class="crayon-sy">(</span><span class="crayon-s">"&amp;lt;%= @post.total_votes %&amp;gt;"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf561b881190103835-2"><span class="crayon-v">&amp;lt</span><span class="crayon-sy">;</span><span class="crayon-o">%=</span><span class="crayon-h"> </span><span class="crayon-e">ajax_flash</span><span class="crayon-sy">(</span><span class="crayon-s">'#top-div'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-v">&amp;gt</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5357bf561b881190103835-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></li>
+</ul>
+<h3>The way I did it</h3>
+<p>So after a lot (I mean a LOT) of trial and error, the best way I could come up with was to create a helper method called <code>ajax_flash</code>. Basically what this method does is inject the same alert div that is injected in the template from rendering the <code>_messages.html.erb</code> partial. It takes the flash message and determines the correct div to put it in. The method itself returns ajax code that does 2 things:</p>
+<ol>
+<li>Clears out the previous ajax flash message so the user can&#8217;t get a huge endless list of messages.</p>
+</li>
+<li>
+<p>Injects the current, relevant message as the first child element of the div you specify.</p>
+</li>
+</ol>
+<p>If you&#8217;re more interested in exactly how I got it to work, the relevant code is in a <a href="https://gist.github.com/mebezac/8944150">gist here</a></p>
+<h3>How the method it is used</h3>
+<p>I call the method like this inside my <code>vote.js.erb</code> view:<br />
+<code>&lt;%= ajax_flash('#top-div') %&gt;</code></p>
+<p>The method takes one argument, <code>div_id</code> which needs to be a string. You <em>could</em> pass a class like this <code>&lt;%= ajax_flash('.some-class') %&gt;</code> if you really wanted, but you should be passing a <code>div_id</code> into it if you want it to work correctly.</p>
+<p>The <code>div_id</code> is the id of the div that you want to inject the message into as the first child element. In this project, it was a div with a class of <code>"span12"</code> from twitter bootstrap that I latched onto. Just put some unique id in the div that contains the rendering of your message partial in your application layout file. Again, to see how I did that, take a look at <a href="https://gist.github.com/mebezac/8944150">this gist</a></p>
+<h3>Overall</h3>
+<p>I am very pleased with how it works and I think it fits into the project much more seamlessly than JavaScript alert messages and helps me keep the code more organized.</p>
+
 					</article> <!-- .et_pb_post -->
 			    <script type="text/javascript">
     // <![CDATA[
@@ -204,153 +506,10 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 </div>			</div> <!-- #left-area -->
 
 				<div id="sidebar">
-		<div id="kebo_twitter_feed_widget-3" class="et_pb_widget kebo_twitter_feed_widget">
-
-<ul class="kebo-tweets slider kebo_twitter_feed_widget-3 dark" data-timeout="10000" data-speed="1000" data-animation="fade">
-
-        
-            
-        
-        
-                
-            
-            <li class="ktweet" >
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/458328094424973313" target="_blank" rel="nofollow">
-                        <time title="Time posted: 21st Apr 2014 15:35:07" datetime="2014-04-21T15:35:07+00:00" aria-label="Posted on 21st Apr 2014 15:35:07">April 21, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        I'm finished with the final course of Tealeaf Academy! - Time to move on to personal projects and a new career :) <a href="http://t.co/fXiP8MafIL" rel="nofollow" target="_blank">http://t.co/fXiP8MafIL</a>                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=458328094424973313"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=458328094424973313"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=458328094424973313"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/458327780426387456" target="_blank" rel="nofollow">
-                        <time title="Time posted: 21st Apr 2014 15:33:52" datetime="2014-04-21T15:33:52+00:00" aria-label="Posted on 21st Apr 2014 15:33:52">April 21, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        <a href="http://www.twitter.com/gotealeaf" rel="nofollow" target="_blank">@gotealeaf</a> Thanks to <a href="http://www.twitter.com/knwang" rel="nofollow" target="_blank">@knwang</a>, <a href="http://www.twitter.com/cglee" rel="nofollow" target="_blank">@cglee</a> and the TAs for your amazing help. I just finished the final course, couldn't have done it without you!                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=458327780426387456"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=458327780426387456"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=458327780426387456"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/458272087224745984" target="_blank" rel="nofollow">
-                        <time title="Time posted: 21st Apr 2014 11:52:34" datetime="2014-04-21T11:52:34+00:00" aria-label="Posted on 21st Apr 2014 11:52:34">April 21, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        ngrok is pretty amazing.                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=458272087224745984"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=458272087224745984"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=458272087224745984"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/457914768825659393" target="_blank" rel="nofollow">
-                        <time title="Time posted: 20th Apr 2014 12:12:43" datetime="2014-04-20T12:12:43+00:00" aria-label="Posted on 20th Apr 2014 12:12:43">April 20, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        Happy Easter! <a href="http://t.co/8LDIu7eYBr" rel="nofollow" target="_blank">http://t.co/8LDIu7eYBr</a>                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=457914768825659393"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=457914768825659393"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=457914768825659393"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/457685216367091712" target="_blank" rel="nofollow">
-                        <time title="Time posted: 19th Apr 2014 21:00:33" datetime="2014-04-19T21:00:33+00:00" aria-label="Posted on 19th Apr 2014 21:00:33">April 20, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        Pressing ctrl+shift+c when trying to copy text from a web page because I'm so used to working in the terminal <a href="http://twitter.com/search?q=developerproblems" rel="nofollow" target="_blank">#developerproblems</a>                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=457685216367091712"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=457685216367091712"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=457685216367091712"></a>
-                </div>
-
-            </li>
-
-                
-                
-      
-            
-    
-</ul></div> <!-- end .et_pb_widget -->		<div id="recent-posts-2" class="et_pb_widget widget_recent_entries">		<h4 class="widgettitle">Recent Posts</h4>		<ul>
+		<div id="twitter_timeline-3" class="et_pb_widget widget_twitter_timeline"><a class="twitter-timeline" data-widget-id="458957731198541824" data-theme="dark" data-link-color="#f96e5b" data-border-color="#e8e8e8" data-tweet-limit="3" width="289" height="215" lang="EN">My Tweets</a></div> <!-- end .et_pb_widget -->		<div id="recent-posts-2" class="et_pb_widget widget_recent_entries">		<h4 class="widgettitle">Recent Posts</h4>		<ul>
+					<li>
+				<a href="http://zaccodes.com/how-to-seed-file-uploads-from-a-remote-url-for-carrierwave/">How to seed file uploads from a remote URL for CarrierWave.</a>
+						</li>
 					<li>
 				<a href="http://zaccodes.com/completely-done-with-tealeaf-academy/">Completely Done With Tealeaf Academy!</a>
 						</li>
@@ -362,9 +521,6 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 						</li>
 					<li>
 				<a href="http://zaccodes.com/done-with-week-5-of-course-3-at-tealeaf-academy/">Done With Week 5 of Course 3 at Tealeaf Academy</a>
-						</li>
-					<li>
-				<a href="http://zaccodes.com/done-with-week-4-of-course-3-at-tealeaf-academy/">Done With Week 4 of Course 3 at Tealeaf Academy</a>
 						</li>
 				</ul>
 		</div> <!-- end .et_pb_widget -->	</div> <!-- end #sidebar -->
@@ -393,7 +549,7 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 	<div class="grofile-hash-map-04f10c6995fbca70863d501fa8c8bcd4">
 	</div>
 	</div>
-<link rel='stylesheet' id='kebo-twitter-plugin-css'  href='http://zaccodes.com/wp-content/plugins/kebo-twitter-feed/css/plugin.css?ver=1.4.11' type='text/css' media='all' />
+<script type='text/javascript' src='//platform.twitter.com/widgets.js?ver=3.9'></script>
 <script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201417'></script>
 <script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2014Apraa'></script>
 <script type='text/javascript'>
@@ -406,53 +562,11 @@ var WPGroHo = {"my_hash":""};
 <script type='text/javascript' src='http://zaccodes.com/wp-content/themes/Divi/js/waypoints.min.js?ver=1.0'></script>
 <script type='text/javascript'>
 /* <![CDATA[ */
-var et_custom = {"ajaxurl":"http:\/\/zactealeaf.uni.me\/wp-admin\/admin-ajax.php","et_load_nonce":"963d624c14","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha"};
+var et_custom = {"ajaxurl":"http:\/\/zactealeaf.uni.me\/wp-admin\/admin-ajax.php","et_load_nonce":"d625f3b5e4","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha"};
 /* ]]> */
 </script>
 <script type='text/javascript' src='http://zaccodes.com/wp-content/themes/Divi/js/custom.js?ver=1.0'></script>
-<script type='text/javascript' src='http://zaccodes.com/wp-content/plugins/kebo-twitter-feed/js/responsiveslides.min.js?ver=1.4.11'></script>
-    <script type="text/javascript">
-        
-        //<![CDATA[
-        jQuery(document).ready(function() {
-            
-            jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
 
-                // Prevent Click from Reloading page
-                e.preventDefault();
-
-                var khref = jQuery(this).attr('href');
-                window.open( khref, 'twitter', 'width=600, height=400, top=0, left=0');
-
-            });
-            
-        });
-        //]]>
-        
-    </script>
-        <script type="text/javascript">
-        //<![CDATA[
-        jQuery(document).ready(function() {
-            
-            ktimeout = jQuery( ".kebo_twitter_feed_widget-3" ).data( "timeout" );
-            kspeed = jQuery( ".kebo_twitter_feed_widget-3" ).data( "speed" );
-            
-            jQuery( function() {
-                jQuery( ".kebo_twitter_feed_widget-3" ).responsiveSlides({
-                    auto: true,           // Boolean: Animate automatically, true or false
-                    speed: kspeed,        // Integer: Speed of the transition, in milliseconds
-                    timeout: ktimeout,    // Integer: Time between slide transitions, in milliseconds
-                    pager: false,         // Boolean: Show pager, true or false
-                    nav: false,           // Boolean: Show navigation, true or false
-                    random: false,        // Boolean: Randomize the order of the slides, true or false
-                    pause: true           // Boolean: Pause on hover, true or false
-                });
-            });
-
-        });
-        //]]>
-    </script>
-    
 	<script src="http://stats.wordpress.com/e-201417.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	st_go({v:'ext',j:'1:2.9.3',blog:'62910279',post:'0',tz:'-4'});

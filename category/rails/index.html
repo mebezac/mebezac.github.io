@@ -29,14 +29,13 @@
 	</script>
 
 	<meta name='robots' content='noindex,follow' />
-<script type="text/javascript">var trackerAjaxUrl="http://zaccodes.com/wp-admin/admin-ajax.php";var trackerNonce="3809af7a99";</script>
+<script type="text/javascript">var trackerAjaxUrl="http://zaccodes.com/wp-admin/admin-ajax.php";var trackerNonce="2a37b257c9";</script>
 
 
 <meta content="Zac Codes v.1.0.0" name="generator"/><link rel='stylesheet' id='jetpack-subscriptions-css'  href='http://zaccodes.com/wp-content/plugins/jetpack/modules/subscriptions/subscriptions.css?ver=3.9' type='text/css' media='all' />
 <link rel='stylesheet' id='crayon-css'  href='http://zaccodes.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=2.6.0' type='text/css' media='all' />
 <link rel='stylesheet' id='crayon-theme-cg-cookie-css'  href='http://zaccodes.com/wp-content/plugins/crayon-syntax-highlighter/themes/cg-cookie/cg-cookie.css?ver=2.6.0' type='text/css' media='all' />
 <link rel='stylesheet' id='crayon-font-monaco-css'  href='http://zaccodes.com/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=2.6.0' type='text/css' media='all' />
-<link rel='stylesheet' id='xagithub_css-css'  href='http://zaccodes.com/wp-content/plugins/wp-xagithub-activity/css/wp-xagithub.css?ver=3.9' type='text/css' media='all' />
 <link rel='stylesheet' id='jetpack-widgets-css'  href='http://zaccodes.com/wp-content/plugins/jetpack/modules/widgets/widgets.css?ver=20121003' type='text/css' media='all' />
 <link rel='stylesheet' id='divi-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,700,800|Raleway:400,200,100,500,700,800,900&#038;subset=latin,latin-ext' type='text/css' media='all' />
 <link rel='stylesheet' id='et-gf-francois-one-css'  href='http://fonts.googleapis.com/css?family=Francois+One:400&#038;subset=latin,latin-ext' type='text/css' media='all' />
@@ -128,12 +127,320 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 		<div id="content-area" class="clearfix">
 			<div id="left-area">
 		
+					<article id="post-1556" class="post-1556 post type-post status-publish format-standard hentry category-rails category-tips et_pb_post">
+
+				
+						<h2><a href="http://zaccodes.com/how-to-seed-file-uploads-from-a-remote-url-for-carrierwave/">How to seed file uploads from a remote URL for CarrierWave.</a></h2>
+
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Apr 23, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a>, <a href="http://zaccodes.com/category/tips/" title="View all posts in Tips" rel="category tag">Tips</a> | </p><p>I recently deployed an app to Heroku. It&#8217;s a Netflix clone called <a href="http://www.zaccodes.com/project/myflix/">MyFlix</a>. The cover art for the different videos are image files stored in an S3 bucket. The files are uploaded when an admin creates a video through the app&#8217;s interface. The wonderful CarrierWave gem, in combination with the Fog gem take care of uploading the image files to S3 and associating the appropriate URLs with the Video objects.</p>
+<p>When I deployed the application however, I didn&#8217;t want to have to go in and create a bunch of videos manually. I wanted to create the videos in the same way I created the rest of the starting data for the application, using my seeds.rb to set up some seed data.</p>
+<p>In my example, using videos, there is a  
+			<span id="crayon-5357bf4f0f68d899756613" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">small_cover</span></span></span> attribute and a  
+			<span id="crayon-5357bf4f0f69f183144507" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">large_cover</span></span></span> attribute. I had already uploaded the cover images to S3 during development, so I had all their URLs.</p>
+<p>Adding those files to my seed video objects was actually pretty easy. All I had to do was specify  
+			<span id="crayon-5357bf4f0f6a6100047185" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">remote_small_cover_url</span></span></span> and 
+			<span id="crayon-5357bf4f0f6ac321821730" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">remote_large_cover_url</span></span></span>. CarrierWave basically just grabs the URL, opens it, and uploads it in whichever way you set. So, even though my files were already uploaded to S3, I really could of put in any image url and it still would have worked.</p>
+<p>So, in summary, say you have  
+			<span id="crayon-5357bf4f0f6b3785696252" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">some_attribute</span></span></span> on your model that is a file, in order to seed data from a URL all you have to do is specify  
+			<span id="crayon-5357bf4f0f6b9593557321" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">remote_some_attribute_url</span></span></span> in your seed data. Here&#8217;s what a whole line might look like:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f0f6bf396615853" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+v9 = Video.create(title: "Monk", description: "Adrian Monk is a brilliant San Francisco detective, whose obsessive compulsive disorder just happens to get in the way.", remote_small_cover_url: "http://s3.amazonaws.com/zacflix/uploads/monk.jpg", remote_large_cover_url: "http://s3.amazonaws.com/zacflix/uploads/monk_large.jpg", categories: [dramas])</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f0f6bf396615853-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f0f6bf396615853-1"><span class="crayon-v">v9</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">Video</span><span class="crayon-sy">.</span><span class="crayon-e">create</span><span class="crayon-sy">(</span><span class="crayon-i">title</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"Monk"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">description</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"Adrian Monk is a brilliant San Francisco detective, whose obsessive compulsive disorder just happens to get in the way."</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">remote_small_cover_url</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"http://s3.amazonaws.com/zacflix/uploads/monk.jpg"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">remote_large_cover_url</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"http://s3.amazonaws.com/zacflix/uploads/monk_large.jpg"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">categories</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">dramas</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0019 seconds] -->
+<p></p>
+
+					</article> <!-- .et_pb_post -->
+			
 					<article id="post-1445" class="post-1445 post type-post status-publish format-standard hentry category-rails category-tealeaf category-updates et_pb_post">
 
 				
 						<h2><a href="http://zaccodes.com/done-with-week-5-of-course-3-at-tealeaf-academy/">Done With Week 5 of Course 3 at Tealeaf Academy</a></h2>
 
-					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Apr 10, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a>, <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p>I just finished up week 5 of the 3rd course at Tealeaf Academy. This week didn&#8217;t focus on as many new features as the previous weeks. We added the ability to invite a friend to join the site (We are working on a NetFlix clone). When the inviter invites a friend,...
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Apr 10, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a>, <a href="http://zaccodes.com/category/tealeaf/" title="View all posts in Tealeaf" rel="category tag">Tealeaf</a>, <a href="http://zaccodes.com/category/updates/" title="View all posts in Updates" rel="category tag">Updates</a> | </p><p>I just finished up week 5 of the 3rd course at Tealeaf Academy. This week didn&#8217;t focus on as many new features as the previous weeks. We added the ability to invite a friend to join the site (We are working on a NetFlix clone). When the inviter invites a friend, the friend receives an email with a link that has a unique token. That token lets us look up the invitation and prefill the email address portion of the registration form. If the friend who was invited accepts and registers for the site using that url with their token in it, they are set up automatically to be following the person they accepted the invitation from and the person who invited them is also automatically following them.</p>
+<p>That was the biggest feature we added this week. We also refactored a bit by moving the token generation code into a concern since it was exactly the same for both the User and Invitation models. We also setup mailgun to be our mailing service. Their API is dead simple and there were no issues setting them up, especially since there is heroku add-on for them.</p>
+<p>We were also introduced to Redis, Resque, and Sidkiq. We ended up using Sidekiq to que and process our emails in the background.</p>
+<p>Most of the heavy lifting of this week was focused on deployment of the application. My app is now deployed at <a href="http://zacflix.herokuapp.com/" target="_blank">zacflix.herokuapp.com</a>. We learned how to use a Procfile to tell Heroku which processes to start. We also learned about the unicorn server this week, so we told Heroku to use the unicorn server for our app with this Procfile:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f15a1b715534360" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Procfile</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+web: bundle exec unicorn -p $PORT -E $RACK_ENV -c ./config/unicorn.rb</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f15a1b715534360-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f15a1b715534360-1"><span class="crayon-i">web</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">bundle</span><span class="crayon-h"> </span><span class="crayon-i">exec</span><span class="crayon-h"> </span><span class="crayon-i">unicorn</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-i">p</span><span class="crayon-h"> </span><span class="crayon-v">$PORT</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-i">E</span><span class="crayon-h"> </span><span class="crayon-v">$RACK_ENV</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-i">config</span><span class="crayon-o">/</span><span class="crayon-v">unicorn</span><span class="crayon-sy">.</span><span class="crayon-i">rb</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0015 seconds] -->
+<p></p>
+<p>The 
+			<span id="crayon-5357bf4f15a27149259922" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-o">/</span><span class="crayon-i">config</span><span class="crayon-o">/</span><span class="crayon-v">unicorn</span><span class="crayon-sy">.</span><span class="crayon-i">rb</span></span></span> file looks like this:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f15a2d814761461" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">unicorn.rb</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
+timeout 15
+preload_app true
+
+before_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
+
+  @sidekiq_pid ||= spawn("bundle exec sidekiq -c 2")
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-2">2</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-4">4</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-6">6</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-8">8</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-10">10</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-12">12</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-14">14</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-16">16</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-18">18</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-20">20</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-22">22</div><div class="crayon-num" data-line="crayon-5357bf4f15a2d814761461-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a2d814761461-24">24</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-1"><span class="crayon-i">worker_processes</span><span class="crayon-h"> </span><span class="crayon-t">Integer</span><span class="crayon-sy">(</span><span class="crayon-v">ENV</span><span class="crayon-sy">[</span><span class="crayon-s">"WEB_CONCURRENCY"</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-2"><span class="crayon-i">timeout</span><span class="crayon-h"> </span><span class="crayon-cn">15</span></div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-3"><span class="crayon-i">preload_app</span><span class="crayon-h"> </span><span class="crayon-r">true</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-4">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-5"><span class="crayon-i">before_fork</span><span class="crayon-h"> </span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-i">server</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">worker</span><span class="crayon-o">|</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-6"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">Signal</span><span class="crayon-sy">.</span><span class="crayon-i">trap</span><span class="crayon-h"> </span><span class="crayon-s">'TERM'</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">puts</span><span class="crayon-h"> </span><span class="crayon-s">'Unicorn master intercepting TERM and sending myself QUIT instead'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-k ">Process</span><span class="crayon-sy">.</span><span class="crayon-i">kill</span><span class="crayon-h"> </span><span class="crayon-s">'QUIT'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-k ">Process</span><span class="crayon-sy">.</span><span class="crayon-i">pid</span></div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-9"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-10">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-11"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">@sidekiq_pid</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-s">"bundle exec sidekiq -c 2"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-12">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-13"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-r">defined</span><span class="crayon-sy">?</span><span class="crayon-sy">(</span><span class="crayon-i">ActiveRecord</span><span class="crayon-o">::</span><span class="crayon-i">Base</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">and</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">ActiveRecord</span><span class="crayon-o">::</span><span class="crayon-v">Base</span><span class="crayon-sy">.</span><span class="crayon-v">connection</span><span class="crayon-sy">.</span><span class="crayon-i">disconnect</span><span class="crayon-o">!</span></div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-15"><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-16">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-17"><span class="crayon-i">after_fork</span><span class="crayon-h"> </span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-i">server</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">worker</span><span class="crayon-o">|</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-18"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">Signal</span><span class="crayon-sy">.</span><span class="crayon-i">trap</span><span class="crayon-h"> </span><span class="crayon-s">'TERM'</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">puts</span><span class="crayon-h"> </span><span class="crayon-s">'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-20"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-21">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-22"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-r">defined</span><span class="crayon-sy">?</span><span class="crayon-sy">(</span><span class="crayon-i">ActiveRecord</span><span class="crayon-o">::</span><span class="crayon-i">Base</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">and</span></div><div class="crayon-line" id="crayon-5357bf4f15a2d814761461-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">ActiveRecord</span><span class="crayon-o">::</span><span class="crayon-v">Base</span><span class="crayon-sy">.</span><span class="crayon-i">establish_connection</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a2d814761461-24"><span class="crayon-st">end</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0054 seconds] -->
+<p></p>
+<p>the 
+			<span id="crayon-5357bf4f15a34726691695" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">@sidekiq_pid</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">spawn</span><span class="crayon-sy">(</span><span class="crayon-s">"bundle exec sidekiq -c 2"</span><span class="crayon-sy">)</span></span></span> line lets us use Sidekiq on our free Heroku server.</p>
+<p>After that, we moved onto learning about setting up a staging server to deploy to before the production server. The staging server is supposed to be as close to the exact same setup as the production server as possible. This allows you to test your code in an environment extremely similar to the public-facing production environment, without the risk of a huge unknown bug taking down your service for your customers. Once you test that everything is working as expected on the staging server, then you can deploy to your production server.</p>
+<p>To help with deployment, were are also using the <a href="http://github.com/mattpolito/paratrooper" target="_blank">paratrooper gem</a>. This gem takes care of a lot things for you when deploying, such as</p>
+<ul>
+<li>Create or update a git tag (if provided)</li>
+<li>Push changes to Heroku</li>
+<li>Run database migrations if any have been added to db/migrate</li>
+<li>Restart the application</li>
+<li>Warm application instance</li>
+</ul>
+<p>This gem is great too because you can set it up so that you can not deploy to production with deploying to staging first, so that you never forget.</p>
+<p><strong>UPDATE: the code in README has been updated in this <a href="https://github.com/mattpolito/paratrooper/pull/58" target="_blank">merge</a>, so it should be good to use now. I&#8217;ll leave the following below for reference.</strong></p>
+<p>The example usage in their readme, however will lead to some errors if you just copy and paste it in. It looks like this:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f15a3d188874143" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">deploy.rake</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+require 'paratrooper'
+
+namespace :deploy do
+  desc 'Deploy app in staging environment'
+  task :staging do
+    deployment = Paratrooper::Deploy.new("amazing-staging-app", tag: 'staging')
+
+    deployment.deploy
+  end
+
+  desc 'Deploy app in production environment'
+  task :production do
+    deployment = Paratrooper::Deploy.new("amazing-production-app") do |deploy|
+      deploy.tag              = 'production',
+      deploy.match_tag        = 'staging',
+      deploy.maintenance_mode = !ENV['NO_MAINTENANCE']
+    end
+
+    deployment.deploy
+  end
+end</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-2">2</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-4">4</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-6">6</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-8">8</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-10">10</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-12">12</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-14">14</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-16">16</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-18">18</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a3d188874143-20">20</div><div class="crayon-num" data-line="crayon-5357bf4f15a3d188874143-21">21</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-1"><span class="crayon-i">require</span><span class="crayon-h"> </span><span class="crayon-s">'paratrooper'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-2">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-3"><span class="crayon-i">namespace</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">deploy</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">desc</span><span class="crayon-h"> </span><span class="crayon-s">'Deploy app in staging environment'</span></div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">task</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">staging</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">Paratrooper</span><span class="crayon-o">::</span><span class="crayon-v">Deploy</span><span class="crayon-sy">.</span><span class="crayon-e">new</span><span class="crayon-sy">(</span><span class="crayon-s">"amazing-staging-app"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">tag</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'staging'</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-sy">.</span><span class="crayon-i">deploy</span></div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-9"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-10">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-11"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">desc</span><span class="crayon-h"> </span><span class="crayon-s">'Deploy app in production environment'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-12"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">task</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">production</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">Paratrooper</span><span class="crayon-o">::</span><span class="crayon-v">Deploy</span><span class="crayon-sy">.</span><span class="crayon-e">new</span><span class="crayon-sy">(</span><span class="crayon-s">"amazing-production-app"</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-i">deploy</span><span class="crayon-o">|</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">tag</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'production'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">match_tag</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'staging'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">maintenance_mode</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-o">!</span><span class="crayon-v">ENV</span><span class="crayon-sy">[</span><span class="crayon-s">'NO_MAINTENANCE'</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-18">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-sy">.</span><span class="crayon-i">deploy</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a3d188874143-20"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line" id="crayon-5357bf4f15a3d188874143-21"><span class="crayon-st">end</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0048 seconds] -->
+<p></p>
+<p>If you make that your 
+			<span id="crayon-5357bf4f15a43105691331" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-i">rake</span></span></span> file and run 
+			<span id="crayon-5357bf4f15a49540508490" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">rake</span><span class="crayon-h"> </span><span class="crayon-i">deploy</span><span class="crayon-o">:</span><span class="crayon-i">production</span></span></span> you will get an error because the author of the paratrooper gem has removed the 
+			<span id="crayon-5357bf4f15a4f942379586" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">maintenance_mode</span><span class="crayon-o">=</span></span></span> method. So, you need to remove the 
+			<span id="crayon-5357bf4f15a55954237548" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">maintenance_mode</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-o">!</span><span class="crayon-v">ENV</span><span class="crayon-sy">[</span><span class="crayon-s">'NO_MAINTENANCE'</span><span class="crayon-sy">]</span></span></span> line so that your 
+			<span id="crayon-5357bf4f15a5b950263976" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-i">rake</span></span></span> looks like this:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f15a60688691436" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">deploy.rake</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+require 'paratrooper'
+
+namespace :deploy do
+  desc 'Deploy app in staging environment'
+  task :staging do
+    deployment = Paratrooper::Deploy.new("zacflixstaging", tag: 'staging')
+
+    deployment.deploy
+  end
+
+  desc 'Deploy app in production environment'
+  task :production do
+    deployment = Paratrooper::Deploy.new("zacflix") do |deploy|
+      deploy.tag              = 'production',
+      deploy.match_tag        = 'staging'
+    end
+
+    deployment.deploy
+  end
+end</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-2">2</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-4">4</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-6">6</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-8">8</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-10">10</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-12">12</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-14">14</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-16">16</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-18">18</div><div class="crayon-num" data-line="crayon-5357bf4f15a60688691436-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a60688691436-20">20</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f15a60688691436-1"><span class="crayon-i">require</span><span class="crayon-h"> </span><span class="crayon-s">'paratrooper'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-2">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-3"><span class="crayon-i">namespace</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">deploy</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">desc</span><span class="crayon-h"> </span><span class="crayon-s">'Deploy app in staging environment'</span></div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">task</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">staging</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">Paratrooper</span><span class="crayon-o">::</span><span class="crayon-v">Deploy</span><span class="crayon-sy">.</span><span class="crayon-e">new</span><span class="crayon-sy">(</span><span class="crayon-s">"zacflixstaging"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">tag</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'staging'</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-sy">.</span><span class="crayon-i">deploy</span></div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-9"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-10">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-11"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">desc</span><span class="crayon-h"> </span><span class="crayon-s">'Deploy app in production environment'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-12"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">task</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">production</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">Paratrooper</span><span class="crayon-o">::</span><span class="crayon-v">Deploy</span><span class="crayon-sy">.</span><span class="crayon-e">new</span><span class="crayon-sy">(</span><span class="crayon-s">"zacflix"</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-i">deploy</span><span class="crayon-o">|</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">tag</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'production'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">match_tag</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'staging'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-17">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-sy">.</span><span class="crayon-i">deploy</span></div><div class="crayon-line" id="crayon-5357bf4f15a60688691436-19"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a60688691436-20"><span class="crayon-st">end</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0043 seconds] -->
+<p></p>
+<p>If you try to run 
+			<span id="crayon-5357bf4f15a66320273817" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">rake</span><span class="crayon-h"> </span><span class="crayon-i">deploy</span><span class="crayon-o">:</span><span class="crayon-i">production</span></span></span> again you will get an error close to this:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f15a6c608831125" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Error</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">ZSH</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+============================================================
+&gt;&gt; Updating Repo Tag: ["production", "staging"]
+============================================================
+
+fatal: too many params
+fatal: remote part of refspec is not a valid name in [production,
+
+============================================================
+&gt;&gt; Pushing refs/tags/["production", "staging"] to Heroku
+============================================================
+
+fatal: remote part of refspec is not a valid name in refs/tags/[production,
+
+============================================================
+&gt;&gt; Accessing zacflix.herokuapp.com to warm up your application
+============================================================</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-2">2</div><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-4">4</div><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-6">6</div><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-8">8</div><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-10">10</div><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-12">12</div><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-14">14</div><div class="crayon-num" data-line="crayon-5357bf4f15a6c608831125-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a6c608831125-16">16</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-1"><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-2"><span class="crayon-o">&gt;&gt;</span><span class="crayon-h"> </span><span class="crayon-e">Updating </span><span class="crayon-e">Repo </span><span class="crayon-i">Tag</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">"production"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"staging"</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-3"><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-4">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-5"><span class="crayon-i">fatal</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">too </span><span class="crayon-e">many </span><span class="crayon-e">params</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-6"><span class="crayon-i">fatal</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">remote </span><span class="crayon-e">part </span><span class="crayon-e">of </span><span class="crayon-e">refspec </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">valid </span><span class="crayon-e">name </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">production</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-8"><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span></div><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-9"><span class="crayon-o">&gt;&gt;</span><span class="crayon-h"> </span><span class="crayon-e">Pushing </span><span class="crayon-i">refs</span><span class="crayon-o">/</span><span class="crayon-i">tags</span><span class="crayon-o">/</span><span class="crayon-sy">[</span><span class="crayon-s">"production"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"staging"</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-v">Heroku</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-10"><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span></div><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-12"><span class="crayon-i">fatal</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">remote </span><span class="crayon-e">part </span><span class="crayon-e">of </span><span class="crayon-e">refspec </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">valid </span><span class="crayon-e">name </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">refs</span><span class="crayon-o">/</span><span class="crayon-i">tags</span><span class="crayon-o">/</span><span class="crayon-sy">[</span><span class="crayon-i">production</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-14"><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span></div><div class="crayon-line" id="crayon-5357bf4f15a6c608831125-15"><span class="crayon-o">&gt;&gt;</span><span class="crayon-h"> </span><span class="crayon-e">Accessing </span><span class="crayon-v">zacflix</span><span class="crayon-e">.herokuapp</span><span class="crayon-e">.com</span><span class="crayon-h"> </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">warm </span><span class="crayon-e">up </span><span class="crayon-e">your </span><span class="crayon-v">application</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a6c608831125-16"><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span><span class="crayon-o">===</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0087 seconds] -->
+<p></p>
+<p>The reason is you need to remove the comma after 
+			<span id="crayon-5357bf4f15a73489395957" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">tag</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'production'</span><span class="crayon-sy">,</span></span></span> . So, your 
+			<span id="crayon-5357bf4f15a79135253979" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-i">rake</span></span></span> file needs to look like this:</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f15a7f533894094" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">deploy.rake</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+require 'paratrooper'
+
+namespace :deploy do
+  desc 'Deploy app in staging environment'
+  task :staging do
+    deployment = Paratrooper::Deploy.new("zacflixstaging", tag: 'staging')
+
+    deployment.deploy
+  end
+
+  desc 'Deploy app in production environment'
+  task :production do
+    deployment = Paratrooper::Deploy.new("zacflix") do |deploy|
+      deploy.tag              = 'production'
+      deploy.match_tag        = 'staging'
+    end
+
+    deployment.deploy
+  end
+end</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-2">2</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-4">4</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-6">6</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-8">8</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-10">10</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-12">12</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-14">14</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-16">16</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-18">18</div><div class="crayon-num" data-line="crayon-5357bf4f15a7f533894094-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f15a7f533894094-20">20</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-1"><span class="crayon-i">require</span><span class="crayon-h"> </span><span class="crayon-s">'paratrooper'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-2">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-3"><span class="crayon-i">namespace</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">deploy</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">desc</span><span class="crayon-h"> </span><span class="crayon-s">'Deploy app in staging environment'</span></div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">task</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">staging</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">Paratrooper</span><span class="crayon-o">::</span><span class="crayon-v">Deploy</span><span class="crayon-sy">.</span><span class="crayon-e">new</span><span class="crayon-sy">(</span><span class="crayon-s">"zacflixstaging"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">tag</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'staging'</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-sy">.</span><span class="crayon-i">deploy</span></div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-9"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-10">&nbsp;</div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-11"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">desc</span><span class="crayon-h"> </span><span class="crayon-s">'Deploy app in production environment'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-12"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">task</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">production</span><span class="crayon-h"> </span><span class="crayon-st">do</span></div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">Paratrooper</span><span class="crayon-o">::</span><span class="crayon-v">Deploy</span><span class="crayon-sy">.</span><span class="crayon-e">new</span><span class="crayon-sy">(</span><span class="crayon-s">"zacflix"</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-i">deploy</span><span class="crayon-o">|</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">tag</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'production'</span></div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deploy</span><span class="crayon-sy">.</span><span class="crayon-v">match_tag</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'staging'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-17">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">deployment</span><span class="crayon-sy">.</span><span class="crayon-i">deploy</span></div><div class="crayon-line" id="crayon-5357bf4f15a7f533894094-19"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f15a7f533894094-20"><span class="crayon-st">end</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0042 seconds] -->
+<p></p>
+<p>This time you can successfully call 
+			<span id="crayon-5357bf4f15a85623052035" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">rake</span><span class="crayon-h"> </span><span class="crayon-i">deploy</span><span class="crayon-o">:</span><span class="crayon-i">production</span></span></span></p>
+<p>Another small issue I ran into this week had to do with adding new gems and deploying to Heroku. There are a couple gems for this project that aren&#8217;t used on my development machine, but only once the code is live on Heroku. Even still, make sure you run 
+			<span id="crayon-5357bf4f15a8b656999140" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">bundle</span></span></span> on your local machine before deploying to Heroku, because your 
+			<span id="crayon-5357bf4f15a91829591855" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">Gemfile</span><span class="crayon-sy">.</span><span class="crayon-i">lock</span></span></span> needs to be up to date.</p>
+<p>One last thing, I found a pretty cool site for honing your ruby (and other language) skills. It&#8217;s called <a href="http://www.codewars.com/" target="_blank">codewars</a>. Basically it is a whole bunch of problems that you need to solve by coding. The first one I tried was writing a method that converted any number from 1 to 1000000000 to a string with commas in the right place.</p>
+<p>The great thing about this site is that it has a simple to use testing framework so you can use TDD to work on the problems. Working on your ruby skills could also help you get a job since you are almost definitely going to be asked to code during an interview. After you complete one of the challenges, you can see how other people have answered it so you pick up new tricks, or different ideas about how to solve problems.</p>
+<p>That&#8217;s all for this week, only 3 weeks left!</p>
+
 					</article> <!-- .et_pb_post -->
 			
 					<article id="post-1418" class="post-1418 post type-post status-publish format-standard hentry category-rails et_pb_post">
@@ -141,7 +448,101 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 				
 						<h2><a href="http://zaccodes.com/using-rails-flash-messages-with-ajax/">Using Rails Flash Messages With Ajax</a></h2>
 
-					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Feb 12, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a> | </p>Ok, so I probably spent a little too much time working on this, but I really wanted to make it work and make it work on my own. tl;dr I wanted to have ajax flash messages instead of JavaScript alerts when a vote failed validation in a reddit-like clone. This is...
+					<p class="post-meta"> by <a href="http://zaccodes.com/author/zac/" title="Posts by Zac Clay" rel="author">Zac Clay</a> | Feb 12, 2014 | <a href="http://zaccodes.com/category/rails/" title="View all posts in Rails" rel="category tag">Rails</a> | </p><p>Ok, so I probably spent a little too much time working on this, but I really wanted to make it work and make it work on my own.</p>
+<h3>tl;dr</h3>
+<p>I wanted to have ajax flash messages instead of JavaScript alerts when a vote failed validation in a reddit-like clone. <a href="http://gist.github.com/mebezac/8944150">This</a> is basically how I did it.</p>
+<h3>What I was trying to accomplish</h3>
+<p>For class, we are building a reddit-like clone. You can see the final solution <a href="http://tl-postit.herokuapp.com/">here</a>. One of the functionalities that we were supposed to add is the ability for the user to vote on a post or comment. We were also supposed &#8216;ajaxify&#8217; the voting so that the entire page doesn&#8217;t need to be reloaded just to update a single number. That part works beautifully, as you can see in the <a href="http://tl-postit.herokuapp.com/">solution</a>. Just register and play around and you&#8217;ll see how it works. The part I didn&#8217;t like was how errors were handled (i.e. trying to vote on a post more than once.).<br />
+I wanted to add the functionality for rails&#8217; flash messages to be displayed using ajax if a vote were invalid.</p>
+<h3>How the solution does it</h3>
+<ul>
+<li>The vote being created in memory in the vote function of the <code>posts_controller</code> is saved as an instance variable (<code>@vote</code>).</li>
+<li>That <code>@vote</code> instance variable then flows through to the <code>vote.js.erb</code> view in the posts view folder.</li>
+<li>There is logic inside the <code>vote.js.erb</code> view that checks if the <code>@vote</code> object is valid</li>
+<li>That logic then displays a JavaScript alert message if the <code>@vote</code> object is invalid</li>
+</ul>
+<p>You can see all of this in action <a href="http://tl-postit.herokuapp.com/">here</a>.</p>
+<h3>Why I didn&#8217;t want to do it that way</h3>
+<ul>
+<li>For my own sake, I didn&#8217;t want to have that kind of validity checking logic and workflow in a view instead of a controller where the rest of that kind of logic is. I wanted to follow as closely as possible to the pattern in other database-hitting methods inside the controller. For example something like this:
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f16779594239409" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+def update
+  if @post.update(post_params)
+    flash[:notice] = "Your post was updated!"
+    redirect_to post_path
+  else
+    render :edit
+  end 
+end
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f16779594239409-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f16779594239409-2">2</div><div class="crayon-num" data-line="crayon-5357bf4f16779594239409-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f16779594239409-4">4</div><div class="crayon-num" data-line="crayon-5357bf4f16779594239409-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f16779594239409-6">6</div><div class="crayon-num" data-line="crayon-5357bf4f16779594239409-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f16779594239409-8">8</div><div class="crayon-num" data-line="crayon-5357bf4f16779594239409-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f16779594239409-1"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-i">update</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f16779594239409-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">@post</span><span class="crayon-sy">.</span><span class="crayon-e">update</span><span class="crayon-sy">(</span><span class="crayon-i">post_params</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5357bf4f16779594239409-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">flash</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-i">notice</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Your post was updated!"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f16779594239409-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">redirect_to</span><span class="crayon-h"> </span><span class="crayon-i">post_path</span></div><div class="crayon-line" id="crayon-5357bf4f16779594239409-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">else</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f16779594239409-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">render</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-i">edit</span></div><div class="crayon-line" id="crayon-5357bf4f16779594239409-7"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">end</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f16779594239409-8"><span class="crayon-st">end</span></div><div class="crayon-line" id="crayon-5357bf4f16779594239409-9">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0019 seconds] -->
+<p></li>
+<li>I didn&#8217;t want to use flash messages for some errors/messages and JavaScript alerts for others, I wanted to be consistent.</p>
+</li>
+<li>I wanted <code>vote</code> to be a local variable to the vote method, not an instance variable that I could accidentally mess up somewhere else.</li>
+<li>
+<p>I wanted my <code>vote.js.erb</code> view file to be as clean as possible (It&#8217;s actually just 2 lines)</p>
+<p></p><!-- Crayon Syntax Highlighter v2.6.0 -->
+
+		<div id="crayon-5357bf4f16784975040420" class="crayon-syntax crayon-theme-cg-cookie crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">Ruby</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:2; -o-tab-size:2; -webkit-tab-size:2; tab-size:2; font-size: 12px !important; line-height: 15px !important;">
+$("#post_&amp;lt;%= @post.id %&amp;gt;_votes").html("&amp;lt;%= @post.total_votes %&amp;gt;");
+&amp;lt;%= ajax_flash('#top-div') %&amp;gt;
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5357bf4f16784975040420-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5357bf4f16784975040420-2">2</div><div class="crayon-num" data-line="crayon-5357bf4f16784975040420-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5357bf4f16784975040420-1"><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">"#post_&amp;lt;%= @post.id %&amp;gt;_votes"</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">html</span><span class="crayon-sy">(</span><span class="crayon-s">"&amp;lt;%= @post.total_votes %&amp;gt;"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5357bf4f16784975040420-2"><span class="crayon-v">&amp;lt</span><span class="crayon-sy">;</span><span class="crayon-o">%=</span><span class="crayon-h"> </span><span class="crayon-e">ajax_flash</span><span class="crayon-sy">(</span><span class="crayon-s">'#top-div'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-v">&amp;gt</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5357bf4f16784975040420-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></li>
+</ul>
+<h3>The way I did it</h3>
+<p>So after a lot (I mean a LOT) of trial and error, the best way I could come up with was to create a helper method called <code>ajax_flash</code>. Basically what this method does is inject the same alert div that is injected in the template from rendering the <code>_messages.html.erb</code> partial. It takes the flash message and determines the correct div to put it in. The method itself returns ajax code that does 2 things:</p>
+<ol>
+<li>Clears out the previous ajax flash message so the user can&#8217;t get a huge endless list of messages.</p>
+</li>
+<li>
+<p>Injects the current, relevant message as the first child element of the div you specify.</p>
+</li>
+</ol>
+<p>If you&#8217;re more interested in exactly how I got it to work, the relevant code is in a <a href="https://gist.github.com/mebezac/8944150">gist here</a></p>
+<h3>How the method it is used</h3>
+<p>I call the method like this inside my <code>vote.js.erb</code> view:<br />
+<code>&lt;%= ajax_flash('#top-div') %&gt;</code></p>
+<p>The method takes one argument, <code>div_id</code> which needs to be a string. You <em>could</em> pass a class like this <code>&lt;%= ajax_flash('.some-class') %&gt;</code> if you really wanted, but you should be passing a <code>div_id</code> into it if you want it to work correctly.</p>
+<p>The <code>div_id</code> is the id of the div that you want to inject the message into as the first child element. In this project, it was a div with a class of <code>"span12"</code> from twitter bootstrap that I latched onto. Just put some unique id in the div that contains the rendering of your message partial in your application layout file. Again, to see how I did that, take a look at <a href="https://gist.github.com/mebezac/8944150">this gist</a></p>
+<h3>Overall</h3>
+<p>I am very pleased with how it works and I think it fits into the project much more seamlessly than JavaScript alert messages and helps me keep the code more organized.</p>
+
 					</article> <!-- .et_pb_post -->
 			    <script type="text/javascript">
     // <![CDATA[
@@ -170,153 +571,10 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 </div>			</div> <!-- #left-area -->
 
 				<div id="sidebar">
-		<div id="kebo_twitter_feed_widget-3" class="et_pb_widget kebo_twitter_feed_widget">
-
-<ul class="kebo-tweets slider kebo_twitter_feed_widget-3 dark" data-timeout="10000" data-speed="1000" data-animation="fade">
-
-        
-            
-        
-        
-                
-            
-            <li class="ktweet" >
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/458328094424973313" target="_blank" rel="nofollow">
-                        <time title="Time posted: 21st Apr 2014 15:35:07" datetime="2014-04-21T15:35:07+00:00" aria-label="Posted on 21st Apr 2014 15:35:07">April 21, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        I'm finished with the final course of Tealeaf Academy! - Time to move on to personal projects and a new career :) <a href="http://t.co/fXiP8MafIL" rel="nofollow" target="_blank">http://t.co/fXiP8MafIL</a>                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=458328094424973313"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=458328094424973313"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=458328094424973313"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/458327780426387456" target="_blank" rel="nofollow">
-                        <time title="Time posted: 21st Apr 2014 15:33:52" datetime="2014-04-21T15:33:52+00:00" aria-label="Posted on 21st Apr 2014 15:33:52">April 21, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        <a href="http://www.twitter.com/gotealeaf" rel="nofollow" target="_blank">@gotealeaf</a> Thanks to <a href="http://www.twitter.com/knwang" rel="nofollow" target="_blank">@knwang</a>, <a href="http://www.twitter.com/cglee" rel="nofollow" target="_blank">@cglee</a> and the TAs for your amazing help. I just finished the final course, couldn't have done it without you!                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=458327780426387456"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=458327780426387456"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=458327780426387456"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/458272087224745984" target="_blank" rel="nofollow">
-                        <time title="Time posted: 21st Apr 2014 11:52:34" datetime="2014-04-21T11:52:34+00:00" aria-label="Posted on 21st Apr 2014 11:52:34">April 21, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        ngrok is pretty amazing.                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=458272087224745984"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=458272087224745984"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=458272087224745984"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/457914768825659393" target="_blank" rel="nofollow">
-                        <time title="Time posted: 20th Apr 2014 12:12:43" datetime="2014-04-20T12:12:43+00:00" aria-label="Posted on 20th Apr 2014 12:12:43">April 20, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        Happy Easter! <a href="http://t.co/8LDIu7eYBr" rel="nofollow" target="_blank">http://t.co/8LDIu7eYBr</a>                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=457914768825659393"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=457914768825659393"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=457914768825659393"></a>
-                </div>
-
-            </li>
-
-            
-        
-                
-            
-            <li class="ktweet" style="display: none;">
-
-                <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/mebezac" target="_blank" rel="nofollow">@mebezac</a>
-                    <a class="kdate" href="https://twitter.com/mebezac/statuses/457685216367091712" target="_blank" rel="nofollow">
-                        <time title="Time posted: 19th Apr 2014 21:00:33" datetime="2014-04-19T21:00:33+00:00" aria-label="Posted on 19th Apr 2014 21:00:33">April 20, 2014</time>
-                    </a>
-                </div>
-
-                <p class="ktext">
-                                            <a href="https://twitter.com/mebezac" title="mebezac @mebezac" target="_blank" rel="nofollow">
-                            <img class="kavatar" src="http://pbs.twimg.com/profile_images/445918621399666688/uTdgsNi5_normal.jpeg" alt="mebezac" />
-                        </a>
-                                        Pressing ctrl+shift+c when trying to copy text from a web page because I'm so used to working in the terminal <a href="http://twitter.com/search?q=developerproblems" rel="nofollow" target="_blank">#developerproblems</a>                </p>
-
-                <div class="kfooter">
-                    <a class="kreply" title="Reply" href="https://twitter.com/intent/tweet?in_reply_to=457685216367091712"></a>
-                    <a class="kretweet" title="Re-Tweet" href="https://twitter.com/intent/retweet?tweet_id=457685216367091712"></a>
-                    <a class="kfavorite" title="Favorite" href="https://twitter.com/intent/favorite?tweet_id=457685216367091712"></a>
-                </div>
-
-            </li>
-
-                
-                
-      
-            
-    
-</ul></div> <!-- end .et_pb_widget -->		<div id="recent-posts-2" class="et_pb_widget widget_recent_entries">		<h4 class="widgettitle">Recent Posts</h4>		<ul>
+		<div id="twitter_timeline-3" class="et_pb_widget widget_twitter_timeline"><a class="twitter-timeline" data-widget-id="458957731198541824" data-theme="dark" data-link-color="#f96e5b" data-border-color="#e8e8e8" data-tweet-limit="3" width="289" height="215" lang="EN">My Tweets</a></div> <!-- end .et_pb_widget -->		<div id="recent-posts-2" class="et_pb_widget widget_recent_entries">		<h4 class="widgettitle">Recent Posts</h4>		<ul>
+					<li>
+				<a href="http://zaccodes.com/how-to-seed-file-uploads-from-a-remote-url-for-carrierwave/">How to seed file uploads from a remote URL for CarrierWave.</a>
+						</li>
 					<li>
 				<a href="http://zaccodes.com/completely-done-with-tealeaf-academy/">Completely Done With Tealeaf Academy!</a>
 						</li>
@@ -328,9 +586,6 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 						</li>
 					<li>
 				<a href="http://zaccodes.com/done-with-week-5-of-course-3-at-tealeaf-academy/">Done With Week 5 of Course 3 at Tealeaf Academy</a>
-						</li>
-					<li>
-				<a href="http://zaccodes.com/done-with-week-4-of-course-3-at-tealeaf-academy/">Done With Week 4 of Course 3 at Tealeaf Academy</a>
 						</li>
 				</ul>
 		</div> <!-- end .et_pb_widget -->	</div> <!-- end #sidebar -->
@@ -357,7 +612,7 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 
 		<div style="display:none">
 	</div>
-<link rel='stylesheet' id='kebo-twitter-plugin-css'  href='http://zaccodes.com/wp-content/plugins/kebo-twitter-feed/css/plugin.css?ver=1.4.11' type='text/css' media='all' />
+<script type='text/javascript' src='//platform.twitter.com/widgets.js?ver=3.9'></script>
 <script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201417'></script>
 <script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2014Apraa'></script>
 <script type='text/javascript'>
@@ -370,53 +625,11 @@ var WPGroHo = {"my_hash":""};
 <script type='text/javascript' src='http://zaccodes.com/wp-content/themes/Divi/js/waypoints.min.js?ver=1.0'></script>
 <script type='text/javascript'>
 /* <![CDATA[ */
-var et_custom = {"ajaxurl":"http:\/\/zactealeaf.uni.me\/wp-admin\/admin-ajax.php","et_load_nonce":"963d624c14","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha"};
+var et_custom = {"ajaxurl":"http:\/\/zactealeaf.uni.me\/wp-admin\/admin-ajax.php","et_load_nonce":"d625f3b5e4","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha"};
 /* ]]> */
 </script>
 <script type='text/javascript' src='http://zaccodes.com/wp-content/themes/Divi/js/custom.js?ver=1.0'></script>
-<script type='text/javascript' src='http://zaccodes.com/wp-content/plugins/kebo-twitter-feed/js/responsiveslides.min.js?ver=1.4.11'></script>
-    <script type="text/javascript">
-        
-        //<![CDATA[
-        jQuery(document).ready(function() {
-            
-            jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
 
-                // Prevent Click from Reloading page
-                e.preventDefault();
-
-                var khref = jQuery(this).attr('href');
-                window.open( khref, 'twitter', 'width=600, height=400, top=0, left=0');
-
-            });
-            
-        });
-        //]]>
-        
-    </script>
-        <script type="text/javascript">
-        //<![CDATA[
-        jQuery(document).ready(function() {
-            
-            ktimeout = jQuery( ".kebo_twitter_feed_widget-3" ).data( "timeout" );
-            kspeed = jQuery( ".kebo_twitter_feed_widget-3" ).data( "speed" );
-            
-            jQuery( function() {
-                jQuery( ".kebo_twitter_feed_widget-3" ).responsiveSlides({
-                    auto: true,           // Boolean: Animate automatically, true or false
-                    speed: kspeed,        // Integer: Speed of the transition, in milliseconds
-                    timeout: ktimeout,    // Integer: Time between slide transitions, in milliseconds
-                    pager: false,         // Boolean: Show pager, true or false
-                    nav: false,           // Boolean: Show navigation, true or false
-                    random: false,        // Boolean: Randomize the order of the slides, true or false
-                    pause: true           // Boolean: Pause on hover, true or false
-                });
-            });
-
-        });
-        //]]>
-    </script>
-    
 	<script src="http://stats.wordpress.com/e-201417.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	st_go({v:'ext',j:'1:2.9.3',blog:'62910279',post:'0',tz:'-4'});

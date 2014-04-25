@@ -28,8 +28,8 @@
 		document.documentElement.className = 'js';
 	</script>
 
-	<meta name='robots' content='noindex,follow' />
-<script type="text/javascript">var trackerAjaxUrl="http://zaccodes.com/wp-admin/admin-ajax.php";var trackerNonce="2a37b257c9";</script>
+	
+<script type="text/javascript">var trackerAjaxUrl="http://zaccodes.com/wp-admin/admin-ajax.php";var trackerNonce="b854a7f160";</script>
 
 
 <meta content="Zac Codes v.1.0.0" name="generator"/><link rel='stylesheet' id='jetpack-subscriptions-css'  href='http://zaccodes.com/wp-content/plugins/jetpack/modules/subscriptions/subscriptions.css?ver=3.9' type='text/css' media='all' />
@@ -152,11 +152,11 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 					<p>It&#8217;s crazy to think about it, but I only have 2 weeks left until I&#8217;m done with all 3 courses at Tealeaf. I&#8217;ve learned an absolutely crazy amount and I&#8217;m so excited to get working on my own projects and look for a job in my new career.</p>
 <p>This week was no different than previous weeks in this course, we learned a whole lot. We covered everything from setting up some admin permissions and restrictions, file uploading, the fog and CarrierWave gems, Amazon S3, and credit card processing using Stripe and a custom form.</p>
 <p>When we were setting up some admin permissions, we needed a way to check if a user were an admin or not. To differentiate &#8220;normal users&#8221; from admins, we added a Boolean column to the users table. Something that I wasn&#8217;t aware of in Rails, is that if you have a Boolean column on a table, it automatically gives you access to a handy method. Say you added a Boolean column with the name 
-			<span id="crayon-5357bf52a6364923947275" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">admin</span></span></span> . You now have access to the 
-			<span id="crayon-5357bf52a6371179510936" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">admin</span><span class="crayon-sy">?</span></span></span>  method. So you can call it like this 
-			<span id="crayon-5357bf52a6377848569830" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">user</span><span class="crayon-sy">.</span><span class="crayon-i">admin</span><span class="crayon-sy">?</span></span></span>  and it will return the Boolean value of that column. Pretty handy!</p>
+			<span id="crayon-535a9879a971e248890957" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">admin</span></span></span> . You now have access to the 
+			<span id="crayon-535a9879a972c707117705" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-i">admin</span><span class="crayon-sy">?</span></span></span>  method. So you can call it like this 
+			<span id="crayon-535a9879a9732256157325" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">user</span><span class="crayon-sy">.</span><span class="crayon-i">admin</span><span class="crayon-sy">?</span></span></span>  and it will return the Boolean value of that column. Pretty handy!</p>
 <p>In the second half of the week I ran into an issue using the Figaro gem to set my Stripe API keys. I was getting a parsing error when trying to start up the rails server. If you run into this issue, check your text editor&#8217;s settings. For me, it was simply because Sublime Text had the indentation setting for the 
-			<span id="crayon-5357bf52a637e404953067" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">application</span><span class="crayon-sy">.</span><span class="crayon-i">yml</span></span></span> file set to Tabs instead of spaces.</p>
+			<span id="crayon-535a9879a9739095517918" class="crayon-syntax crayon-syntax-inline  crayon-theme-cg-cookie crayon-theme-cg-cookie-inline crayon-font-monaco" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-pre crayon-code" style="font-size: 12px !important; line-height: 15px !important;font-size: 12px !important;"><span class="crayon-v">application</span><span class="crayon-sy">.</span><span class="crayon-i">yml</span></span></span> file set to Tabs instead of spaces.</p>
 <p>Learning how to use Stripe was a lot of fun. Having the ability to accept credit cards right on my site in my own form without having to worry about PCI compliance or anything else like that is really powerful. There aren&#8217;t a lot of projects to work on that won&#8217;t need payment processing of some sort. Setting up the custom form for Stripe was also a lot of fun because I got to brush back up on my JavaScript and jQuery skills.</p>
 <p>I&#8217;ve got a number of ideas for projects to start on as soon as I&#8217;m done with Tealeaf to bolster up my portfolio. There&#8217;s one leading in my mind, but I&#8217;ll post about that more once I get started :)</p>
 					</div> <!-- .entry-content -->
@@ -230,6 +230,9 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 				<div id="sidebar">
 		<div id="twitter_timeline-3" class="et_pb_widget widget_twitter_timeline"><a class="twitter-timeline" data-widget-id="458957731198541824" data-theme="dark" data-link-color="#f96e5b" data-border-color="#e8e8e8" data-tweet-limit="3" width="289" height="215" lang="EN">My Tweets</a></div> <!-- end .et_pb_widget -->		<div id="recent-posts-2" class="et_pb_widget widget_recent_entries">		<h4 class="widgettitle">Recent Posts</h4>		<ul>
 					<li>
+				<a href="http://zaccodes.com/tealeaf-academy-review/">Tealeaf Academy Review</a>
+						</li>
+					<li>
 				<a href="http://zaccodes.com/how-to-seed-file-uploads-from-a-remote-url-for-carrierwave/">How to seed file uploads from a remote URL for CarrierWave.</a>
 						</li>
 					<li>
@@ -240,9 +243,6 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 						</li>
 					<li>
 				<a href="http://zaccodes.com/done-with-week-6-of-course-3-at-tealeaf-academy/">Done With Week 6 of Course 3 at Tealeaf Academy</a>
-						</li>
-					<li>
-				<a href="http://zaccodes.com/done-with-week-5-of-course-3-at-tealeaf-academy/">Done With Week 5 of Course 3 at Tealeaf Academy</a>
 						</li>
 				</ul>
 		</div> <!-- end .et_pb_widget -->	</div> <!-- end #sidebar -->
@@ -283,7 +283,7 @@ var WPGroHo = {"my_hash":""};
 <script type='text/javascript' src='http://zaccodes.com/wp-content/themes/Divi/js/waypoints.min.js?ver=1.0'></script>
 <script type='text/javascript'>
 /* <![CDATA[ */
-var et_custom = {"ajaxurl":"http:\/\/zactealeaf.uni.me\/wp-admin\/admin-ajax.php","et_load_nonce":"d625f3b5e4","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha"};
+var et_custom = {"ajaxurl":"http:\/\/zactealeaf.uni.me\/wp-admin\/admin-ajax.php","et_load_nonce":"0bc41fbfa2","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha"};
 /* ]]> */
 </script>
 <script type='text/javascript' src='http://zaccodes.com/wp-content/themes/Divi/js/custom.js?ver=1.0'></script>

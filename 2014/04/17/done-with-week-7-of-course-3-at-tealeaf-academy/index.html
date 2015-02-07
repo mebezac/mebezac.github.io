@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="The Page Description">
+  <style type="text/css">@-ms-viewport{width: device-width;}</style>
+  <title>Done With Week 7 of Course 3 at Tealeaf Academy • Zac Clay</title>
+  <link rel="stylesheet" href="/css/layers.min.css" media="screen">
+  <link rel="stylesheet" href="/css/pygments.css.scss" media="screen">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen">
+  <link rel="stylesheet" href="/css/style.css" media="screen">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+</head>
+
+	<body class="single single-post">
+
+		<header role="banner" class="transparent light">
+      <div class="row">
+        <div class="nav-inner row-content buffer-left buffer-right even clear-after">
+          <div id="brand">
+            <h1 class="reset"><!--<img src="img/logo.png" alt="logo">--><a href="/">Zac Clay</a></h1>
+          </div><!-- brand -->
+          <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
+          <nav>
+            <ul class="reset" role="navigation">
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li>
+              <li class="menu-item">
+                <a href="/blog">Blog</a>
+              </li>
+              <li class="menu-item">
+                <a href="/resume">Resume</a>
+              </li>
+              <li class="menu-item">
+                <a href="/contact">Contact</a>
+              </li>
+            </ul>
+          </nav>
+        </div><!-- row-content -->
+      </div><!-- row -->
+    </header>
+
+		<main role="main">
+			
+				<div id="intro-wrap">
+	        <div id="intro" class="preload darken more-button">
+	          <div class="intro-item" style="background-image: url(/img/tealeaf.png);">
+	            <div class="caption">
+	              <h2>Done With Week 7 of Course 3 at Tealeaf Academy</h2>
+	            </div><!-- caption -->
+	          </div>
+	        </div><!-- intro -->
+	      </div><!-- intro-wrap -->
+	    
+
+			<div id="main" class="row">
+				<div class="row-content buffer-left buffer-right buffer-bottom">
+					<div id="post-nav">
+						<ul class="clear-after reset plain">
+							
+								<li id="prev-items" class="post-nav"><a href="/2014/04/15/done-with-week-6-of-course-3-at-tealeaf-academy/"><i class="fa fa-chevron-left"></i><span class="label">Prev</span></a></li>
+							
+							<li id="all-items" class="post-nav"><a href="/blog"><i class="icon icon-images"></i></a></li>
+							
+								<li id="next-items" class="post-nav"><a href="/2014/04/21/completely-done-with-tealeaf-academy/"><span class="label">Next</span><i class="fa fa-chevron-right"></i></a></li>
+							
+						</ul>
+					</div>
+
+					<div class="post-area clear-after">
+						<article role="main">
+							<h5 class="meta-post"><time datetime="2014-04-17T15:32:35Z" itemprop="datePublished">April 17, 2014</time></p></h5>
+							<h1>Done With Week 7 of Course 3 at Tealeaf Academy</h1>
+							<p>As I race towards the end of the last of Tealeaf’s courses (only 1 week after this!), I find myself learning more in each lesson than a few of the previous ones combined. The amount of learning is growing at an exponential rate!</p>
+
+<h3 id="stuff-we-learned">Stuff We Learned</h3>
+
+<p>This week we covered all kinds of cool stuff. The first half of the week we covered building wrappers for connecting with APIs, fully integrating APIs into your testing, using the webmock and VCR gems to “record” the responses of API requests so only your first test actually hits the server. Learning about that led us to cover some advanced topics in testing and RSpec. Specifically, we covered test doubles, stubs, mocks, and testing JS using Selenium.</p>
+
+<p>In the second half we covered going beyond the simple MVC architecture of Rails to accommodate more complex applications. This included things like extracting various parts of logic to decorators, policy objects, domain objects, and service objects. We then learned how to test this object composition using message expectation in RSpec.</p>
+
+<h3 id="first-half-of-the-week">First Half of The Week</h3>
+
+<p>So we started out the first half of the week by moving our all of the logic concerning interacting with the external Stripe API into an API wrapper (<code class="highlight">/app/models/stripe_wrapper.rb</code>). Moving that kind of logic into a wrapper is great because it allows you to remove unnecessary noise from your controllers, and it allows you to test the API interactions in one place.</p>
+
+<p>Speaking of testing API interactions, we made use of the webmock and VCR gems to “record” the response coming back from Stripe’s servers the first time we hit them with the test. This is great because it significantly cuts down the time it takes to run subsequent tests. The first time I went to use VCR however, I was given an error saying that my YAML version was out of date. This was an easy fix be re-installing ruby using rbenv. This updated YAML for me.</p>
+
+<p>We are using stripe.js to handle our payments, because it allows you to capture user’s credit card numbers without them ever touching your server. Because of this however, our feature tests need to be able to interact with JavaScript. We accomplished this by using the selenium-webdriver with capybara and the database_cleaner gem. Here again I ran into a bit of an issue. This time, the issue was really two issues.</p>
+
+<p>First, capybara wasn’t able to open the email sent by my server and click the link in it. This is solved by manually setting the capybara and test port to be the same. So in my <code class="highlight">spec_helper.rb</code> file, I added the following at the very bottom:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Capybara</span><span class="o">.</span><span class="n">server_port</span> <span class="o">=</span> <span class="mi">52662</span></code></pre></div>
+
+<p>Then in my <code class="highlight">config/test.rb</code> file I changed the line</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;localhost:3000&#39;</span> <span class="p">}</span></code></pre></div>
+
+<p>to</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;localhost:52662&#39;</span> <span class="p">}</span></code></pre></div>
+
+<p>The second issue I was having was with the database_cleaner gem. For one of my tests, it wasn’t cleaning the database correctly and was causing it to fail. To fix this I just needed to change the <code class="highlight">DatabaseCleaner.strategy</code> to <code class="highlight">:deletion</code>.</p>
+
+<p>So, after moving our API interaction logic to a wrapper, we could test that thoroughly and be confident that any calls to it would function as they should. This allowed us to remove explicit calls to the wrapper from our controller tests and instead replace them with test doubles and stubs. Basically, this means that we “mocked” or faked the response of calling a method from the wrapper and forced it have the response we want.</p>
+
+<p>For example, in our users_controller_spec, we test a user signing up for our service, which includes paying with a credit card. Instead of actually going through all the way of actually hitting a method in our Stripe wrapper and getting a response from it, we can stub it. All we really care about it is what our UsersController does when there is a successful charge. So, we can simulate the response of a successful charge without actually having to create a successful charge. Once again, this gives us the ability to test the logic of our wrapper in only one place without having to worry in other specs about how to get a successful response from it. If later down the road we were to change our API wrapper, we would only need to update the spec for it. Since we stubbed the method call on our wrapper in our controller spec, we don’t care how a charge is successfully placed, we just care that our controller knows what do with a successful charge.</p>
+
+<p>Testing like this is especially useful for large organizations because it allows individuals or teams to work on one part of the application without really having to worry about the logic of another part. It makes code a lot more reusable, changeable, and stable.</p>
+
+<h3 id="second-half-of-the-week">Second Half of The Week</h3>
+
+<p>In this part we covered some of the aspects of application design that go beyond just a simple MVC structure. While you can push logic from your controller down to your model to achieve a “skinny controller and fat model”, eventually your model might become a huge, bloated monster. That’s when it may be a good idea to start moving some of the logic into their own objects.</p>
+
+<p>We covered decorators, policy objects, domain objects, and service objects.</p>
+
+<p><strong>Decorators</strong> are where you put the presentation logic. For example in our application we had a small conditional in our video show template. Basically it showed the average rating of the video if there were one, and displayed “N/A” if there weren’t any reviews for that video. We moved that logic into a decorator.</p>
+
+<p><strong>Policy Objects</strong> are a great place to put logic about users’ privileges and access. For example, our app only has the simple distinction of being an admin or not being an admin. So the <code class="highlight">admin?</code> method in the User model is good enough for us. However, in a more complex application this is where you could put the logic to determine what kind of access different users of different levels have.</p>
+
+<p><strong>Domain Objects</strong> are where you extract the “nouns” to. This is a good place to wrap up logic you have for interacting with an attribute of a model. For example, say you have a User model that has a credit attribute. In your application, you may have to reference and modify that credit attribute a lot. It doesn’t really make sense to make credits their own model extended from ActiveRecord with a database table. However, it would be nice to not have to call <code class="highlight">current_user.credit</code> all the time. This is what domain objects are for. You can create a Credit object that handles all the logic of accessing the user and manipulating the credit attribute.</p>
+
+<p><strong>Service Objects</strong> if domain objects are where you extract your nouns to, service objects are where you extract your “verbs” to. In our application, we have a somewhat complicated set of actions that occur when a user signs up. We were able to extract this process into a UserSignup object. This gives us a really clean, easy to read controller. It also gives us the ability to test the sign up logic in isolation.</p>
+
+<p>It’s not always necessary, or even beneficial at all to move logic to any of these objects. If your logic is simple enough and not cluttering your controllers or models, it might help to keep it all in one place. However, if you’re dealing with a really complicated process in your controller, or a really bloated model, it makes sense to move that logic out.</p>
+
+<p>After you start splitting your logic into smaller pieces, you can write very specific, focused specs that cover the permutations of that piece of logic. It is then no longer necessary, or useful to test that logic again in another spec. However, you do need to test that your different pieces are communicating with each other correctly. This is where message expectation comes in handy. This allows you to assert that, for example, a controller delegates a certain action to a service object. Once again, this allows you to test the logic of the service object and the controller isolated from each other.</p>
+
+<h3 id="final-thoughts">Final Thoughts</h3>
+
+<p>This week was awesome because we covered a whole lot of advanced topics that I think are going to help me in my future projects and in landing a job doing something I love.</p>
+
+<p>I only have one more week of class and then I am completely done! It has been a wonderful journey so far and I can’t wait to see what is in store for me next.</p>
+
+
+						</article>
+
+					</div><!-- post-area -->
+
+					<div class="meta-social">
+  <ul class="inline center">
+    <li><a href="https://twitter.com/intent/tweet?text=Done%20With%20Week%207%20of%20Course%203%20at%20Tealeaf%20Academy&amp;url=/2014/04/17/done-with-week-7-of-course-3-at-tealeaf-academy/&amp;via=mebezac" class="twitter-share border-box" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u=/2014/04/17/done-with-week-7-of-course-3-at-tealeaf-academy/" class="facebook-share border-box" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+    <li><a href="https://plus.google.com/share?url=/2014/04/17/done-with-week-7-of-course-3-at-tealeaf-academy/" class="pinterest-share border-box" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a></li>
+  </ul>
+</div>
+
+					<hr />
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'zacimblog';
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+					<div class="related clear-after">
+						<h4>Recent Posts</h4>
+						
+							<div class="item ">
+								<figure><img src="/img/jekyll-square.jpg" alt=""></figure>
+								<a class="overlay" href="/2015/02/06/switched-from-wordpress-to-jekyll/">
+									<div class="overlay-content">
+										<div class="post-type"><i class="icon icon-doc"></i></div>
+										<h2>I switched from Wordpress to Jekyll</h2>
+										<p>So, it's been a really long time (<em>like a really, really long time</em>) since I've posted, or updated this site at all. Basically it's been because I hav...</p>
+									</div><!-- overlay-content -->
+								</a><!-- overlay -->
+							</div>
+						
+							<div class="item ">
+								<figure><img src="/img/tds-teaser.png" alt=""></figure>
+								<a class="overlay" href="/2014/04/28/building-that-dont-suck-a-rails-app-from-scratch-sneak-peak-at-the-ui/">
+									<div class="overlay-content">
+										<div class="post-type"><i class="icon icon-doc"></i></div>
+										<h2>Building That Don't Suck (a rails app) from scratch. Sneak Peak at the UI.</h2>
+										<p>So, now that I'm done learning how to build Rails apps, it's time to use my knowledge to build some real applications. The first project I've chosen to work ...</p>
+									</div><!-- overlay-content -->
+								</a><!-- overlay -->
+							</div>
+						
+							<div class="item last">
+								<figure><img src="/img/tealeaf-academy-logo.png" alt=""></figure>
+								<a class="overlay" href="/2014/04/25/tealeaf-academy-review/">
+									<div class="overlay-content">
+										<div class="post-type"><i class="icon icon-doc"></i></div>
+										<h2>Tealeaf Academy Review</h2>
+										<p>I recently finished the last lesson of the last week of the last course of Tealeaf Academy. I thought it would be a good idea to share my experience with any...</p>
+									</div><!-- overlay-content -->
+								</a><!-- overlay -->
+							</div>
+						
+					</div>
+
+
+				</div><!-- row-content -->
+			</div><!-- row -->
+		</main><!-- main -->
+
+		<footer role="contentinfo">
+  <div class="row">
+    <div class="row-content buffer clear-after">
+      <section id="top-footer">
+        <div class="widget column three">
+        </div>
+        <div class="widget column three">
+          <h4>Menu</h4>
+          <ul class="plain">
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/resume">Resume</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="widget meta-social column three">
+          <h4>Connect</h4>
+          <ul class="inline">
+             <li><a href="https://twitter.com/mebezac" class="twitter-share border-box" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li> 
+             <li><a href="https://github.com/mebezac" class="github-share border-box" target="_blank"><i class="fa fa-github fa-lg"></i></a></li> 
+          </ul>
+        </div>
+      </section><!-- top-footer -->
+      <section id="bottom-footer">
+        <p class="centertxt">2015 <a href="">Zac Clay</a> powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a>. All Rights Reserved.</p>
+        <p class="keep-right"></p>
+      </section><!-- bottom-footer -->
+    </div><!-- row-content -->
+  </div><!-- row -->
+</footer>
+
+		<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/beetle.js"></script>
+
+	</body>
+
+</html>

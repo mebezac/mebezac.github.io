@@ -1,116 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/</loc>
+    <loc>http://www.zac.im/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/</loc>
     <lastmod>2015-03-11T19:53:58-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2015/02/06/switched-from-wordpress-to-jekyll/</loc>
+    <loc>http://www.zac.im/2015/02/06/switched-from-wordpress-to-jekyll/</loc>
     <lastmod>2015-02-06T18:53:58-05:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/28/building-that-dont-suck-a-rails-app-from-scratch-sneak-peak-at-the-ui/</loc>
+    <loc>http://www.zac.im/2014/04/28/building-that-dont-suck-a-rails-app-from-scratch-sneak-peak-at-the-ui/</loc>
     <lastmod>2014-04-28T15:03:58-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/25/tealeaf-academy-review/</loc>
+    <loc>http://www.zac.im/2014/04/25/tealeaf-academy-review/</loc>
     <lastmod>2014-04-25T12:56:08-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/23/how-to-seed-file-uploads-from-a-remote-url-for-carrierwave/</loc>
+    <loc>http://www.zac.im/2014/04/23/how-to-seed-file-uploads-from-a-remote-url-for-carrierwave/</loc>
     <lastmod>2014-04-23T09:13:38-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/21/completely-done-with-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/04/21/completely-done-with-tealeaf-academy/</loc>
     <lastmod>2014-04-21T15:27:37-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/17/done-with-week-7-of-course-3-at-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/04/17/done-with-week-7-of-course-3-at-tealeaf-academy/</loc>
     <lastmod>2014-04-17T15:32:35-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/15/done-with-week-6-of-course-3-at-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/04/15/done-with-week-6-of-course-3-at-tealeaf-academy/</loc>
     <lastmod>2014-04-15T14:40:55-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/10/done-with-week-5-of-course-3-at-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/04/10/done-with-week-5-of-course-3-at-tealeaf-academy/</loc>
     <lastmod>2014-04-10T11:07:11-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/03/27/done-with-week-4-of-course-3-at-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/03/27/done-with-week-4-of-course-3-at-tealeaf-academy/</loc>
     <lastmod>2014-03-27T16:11:44-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/03/26/finished-week-3-of-course-3-at-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/03/26/finished-week-3-of-course-3-at-tealeaf-academy/</loc>
     <lastmod>2014-03-26T10:29:23-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/03/22/finished-week-2-of-course-3-at-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/03/22/finished-week-2-of-course-3-at-tealeaf-academy/</loc>
     <lastmod>2014-03-22T10:31:15-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/03/18/finished-with-week-1-of-course-3-at-tealeaf-accademy/</loc>
+    <loc>http://www.zac.im/2014/03/18/finished-with-week-1-of-course-3-at-tealeaf-accademy/</loc>
     <lastmod>2014-03-18T14:21:55-04:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/02/12/using-rails-flash-messages-with-ajax/</loc>
+    <loc>http://www.zac.im/2014/02/12/using-rails-flash-messages-with-ajax/</loc>
     <lastmod>2014-02-12T15:51:30-05:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/25/week-4-completely-done-ajax-ing-it-up-github-branches-etc/</loc>
+    <loc>http://www.zac.im/2014/01/25/week-4-completely-done-ajax-ing-it-up-github-branches-etc/</loc>
     <lastmod>2014-01-25T17:36:44-05:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/24/week-3-done-and-4-basically-done-at-tealeaf-academy/</loc>
+    <loc>http://www.zac.im/2014/01/24/week-3-done-and-4-basically-done-at-tealeaf-academy/</loc>
     <lastmod>2014-01-24T16:32:37-05:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/21/second-week-at-tealeaf-academy-done/</loc>
+    <loc>http://www.zac.im/2014/01/21/second-week-at-tealeaf-academy-done/</loc>
     <lastmod>2014-01-21T17:09:30-05:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/20/first-week-of-tealeaf-academy-is-done/</loc>
+    <loc>http://www.zac.im/2014/01/20/first-week-of-tealeaf-academy-is-done/</loc>
     <lastmod>2014-01-20T17:50:56-05:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/contact/</loc>
-    <lastmod>2015-03-12T08:55:19-04:00</lastmod>
+    <loc>http://www.zac.im/contact/</loc>
+    <lastmod>2015-03-12T16:04:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/blog/</loc>
-    <lastmod>2015-03-12T08:55:19-04:00</lastmod>
+    <loc>http://www.zac.im/blog/</loc>
+    <lastmod>2015-03-12T16:04:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/</loc>
-    <lastmod>2015-03-12T08:55:19-04:00</lastmod>
+    <loc>http://www.zac.im/</loc>
+    <lastmod>2015-03-12T16:04:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>/resume/</loc>
-    <lastmod>2015-03-12T08:55:19-04:00</lastmod>
+    <loc>http://www.zac.im/resume/</loc>
+    <lastmod>2015-03-12T16:04:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

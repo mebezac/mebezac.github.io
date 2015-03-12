@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="The Page Description">
+  <style type="text/css">@-ms-viewport{width: device-width;}</style>
+  <title>2 Easy Ways to Display Lots of Data Faster in a Rails App • Zac Clay</title>
+  <link rel="stylesheet" href="/css/main.css" media="screen">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+</head>
+
+	<body class="single single-post">
+
+		<header role="banner" class="transparent light">
+      <div class="row">
+        <div class="nav-inner row-content buffer-left buffer-right even clear-after">
+          <div id="brand">
+            <h1 class="reset"><!--<img src="img/logo.png" alt="logo">--><a href="/">Zac Clay</a></h1>
+          </div><!-- brand -->
+          <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
+          <nav>
+            <ul class="reset" role="navigation">
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li>
+              <li class="menu-item">
+                <a href="/blog">Blog</a>
+              </li>
+              <li class="menu-item">
+                <a href="/resume">Resume</a>
+              </li>
+              <li class="menu-item">
+                <a href="/contact">Contact</a>
+              </li>
+            </ul>
+          </nav>
+        </div><!-- row-content -->
+      </div><!-- row -->
+    </header>
+
+		<main role="main">
+			
+				<div id="intro-wrap">
+	        <div id="intro" class="preload darken more-button">
+	          <div class="intro-item" style="background-image: url(/img/post-images/faster.jpg);">
+	            <div class="caption">
+	              <h2>2 Easy Ways to Display Lots of Data Faster in a Rails App</h2>
+	            </div><!-- caption -->
+	          </div>
+	        </div><!-- intro -->
+	      </div><!-- intro-wrap -->
+	    
+
+			<div id="main" class="row">
+				<div class="row-content buffer-left buffer-right buffer-bottom">
+					<div id="post-nav">
+						<ul class="clear-after reset plain">
+							
+								<li id="prev-items" class="post-nav"><a href="/2015/02/06/switched-from-wordpress-to-jekyll/"><i class="fa fa-chevron-left"></i><span class="label">Prev</span></a></li>
+							
+							<li id="all-items" class="post-nav"><a href="/blog"><i class="icon icon-images"></i></a></li>
+							
+						</ul>
+					</div>
+
+					<div class="post-area clear-after">
+						<article role="main">
+							<h5 class="meta-post"><time datetime="2015-03-11T19:53:58Z" itemprop="datePublished">March 11, 2015</time></p></h5>
+							<h1>2 Easy Ways to Display Lots of Data Faster in a Rails App</h1>
+							<p>Rendering views is <em>almost</em> always the slowest part of a rails app. The more data you need to display, the more rendering needs to take place, the slower the app loads. This post is going to show you how to use a couple tools to display lots of data in a rails app in a faster way.</p>
+
+<p>In our app, <a href="https://www.bookacoach.com/">bookacoach</a> (<em>A site that helps sports academies manage all their training online</em>), I need to display a lot of data in 2 forms. 1. Data in a table form. 2. Data in a calendar form.</p>
+
+<h3 id="speeding-up-pages-with-lots-of-data">Speeding up pages with lots of data</h3>
+
+<p>A great way to speed up the loading of pages with lots of data is to let everything do what it’s good at. Databases are really good at storing, searching, and sorting. So lets’ have the database handle that work (through our ORM, ActiveRecord). Rails is really good getting data from the database to the views through a controller, so let it do that. jQuery in conjunction with AJAX is really good at loading data from a source and then changing the data the user sees, so we’ll use it for that.</p>
+
+<p>For both our needs, displaying lots of data in a table form, and displaying lots of data in a calendar form, there happen to be some awesome pre-built tools I can implement.</p>
+
+<h2 id="displaying-data-in-table-form">1. Displaying data in table form</h2>
+
+<p>Quite aptly named, <a href="http://www.datatables.net/">DataTables</a>, is a jQuery plugin that is great for displaying, searching and sorting data in a table form. DataTables can load a JSON data source using AJAX, so it’s perfect for what I want to do. There’s even a great little wrapper for DataTables’ AJAX functionality in rails again aptly named <a href="https://github.com/antillas21/ajax-datatables-rails">ajax-datatables-rails</a>, and that’s what I used in our app.</p>
+
+<p>The ajax-datatables-rails gem is pretty straightforward to use. You can read the docs to see how you would set it up for a DataTable displaying data from a single model. It’s a great little gem because it uses the database to do all the searching and sorting, something the database is very good (and fast) at.</p>
+
+<p>In our app, I needed to display a lot of different models (different kinds of trainings) all on the same DataTable and still be able to sort, search, and paginate the data. What I ended up doing was creating a <code class="highlight">TrainingSearchEntry</code> model. Each <code class="highlight">TrainingSearchEntry</code> object shares the same attributes, even though the attributes/methods in each of the different training models may be different. Each training  <code class="highlight">has_one: training_search_entry</code> that is created or updated each time a training is created or updated. This allowed me to have a standard interface for my DataTable to search and sort, even if the trainings backing the data are all vastly different. The end result is something like this:</p>
+
+<p><a href="/img/post-images/data_table.png"><img src="/img/post-images/data_table_50_percent.png" alt="" /></a></p>
+
+<h3 id="a-couple-tricks-learned-along-the-way">A couple tricks learned along the way</h3>
+
+<h4 id="correctly-sorting-single-day-events-with-multi-day-events">Correctly sorting single-day events with multi-day events</h4>
+
+<p>In our app there basically two different categories trainings can fall into, time-wise. Either a single-day event (e.g. May 3rd 2PM - 3:30 PM) or multi-day event (e.g. May 3rd 2PM - 3:30 PM, May 10th 2PM - 3:30 PM, and May 15th 1PM - 2PM) You’ll notice one of the columns in my DataTable is “Date &amp; Time”. So how do you sort in the database a bunch of different trainings with their own models based on their date and time when some of them have only one date and time and some have multiple? This is one of the reasons I decided have a dedicated <code class="highlight">TrainingSearchEntry</code> model. When building the <code class="highlight">date_and_time</code> value for any given <code class="highlight">TrainingSearchEntry</code> object, I have code that creates the time in this format <code class="highlight">sortable-datestring|Human Readable Datestring</code>. So for example, a lesson that happens on Sat, 04/11/15 12:30 PM - 1:00 PM would have a <code class="highlight">date_and_time</code> of this <code class="highlight">"201504111230|Sat, 04/11/15 12:30 PM - 1:00 PM EST"</code>. A multi-day training might have one that looks like this <code class="highlight">"201504021045|Thu, 04/02/15 - Thu, 04/09/15"</code>. As you can see, the earliest date is put in a sortable format before the <code>"|"</code> character.</p>
+
+<p>Then in my <code class="highlight">app/datatable/training_datatable.rb</code> I have some handy little code that splits that string up so the sure doesn’t see the weird string used for sorting in the database, but instead only sees the human readable part.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">build_hidden_search_and_sort_string</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">string</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+    <span class="s2">&quot;&lt;span class=&#39;date-sort-span&#39;&gt;</span><span class="si">#{</span><span class="n">array</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="si">}</span><span class="s2">&lt;/span&gt;</span><span class="si">#{</span><span class="n">array</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">else</span>
+    <span class="s1">&#39;&#39;</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>The class <code class="highlight">date-sort-span</code> is then hidden with CSS. This allows DataTables to sort by date correctly.</p>
+
+<h4 id="filtering-based-on-training-type">Filtering based on training type.</h4>
+<p><a href="/img/post-images/filters.png"><img src="/img/post-images/filters.png" alt="" /></a></p>
+
+<p>Creating filters also takes advantage of hiding the text on the left side of a <code>"|"</code> character. Each <code class="highlight">TrainingSearchEntry</code> has a title attribute that is something similar to this <code class="highlight">is: some categorical description|Title of training</code>. For example a camp’s title is setup like this <code class="highlight">"is: camp not day|Camp #{training.title}"</code>. I use the same <code class="highlight">build_hidden_search_and_sort_string</code> method from above to hide the text to the left of the <code>"|"</code> character and show the text on the right to the user.</p>
+
+<p>To make the filters work with DataTables is a simple as searching for the required text (e.g. “is: camp not day”) when the filter is clicked. That’s done with this JavaScript:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Get the instance of the DataTable</span>
+<span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#scheduled-training-table&quot;</span><span class="p">).</span><span class="nx">DataTable</span><span class="p">();</span>
+
+<span class="c1">// On click of the filter, search for the phrase, then draw the results on the table</span>
+<span class="nx">$</span><span class="p">(</span> <span class="s2">&quot;#camp-filter&quot;</span> <span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">table</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s1">&#39;is: camp not day&#39;</span><span class="p">).</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">});</span></code></pre></div>
+
+<h4 id="loading-indicator">Loading indicator</h4>
+<p><a href="/img/post-images/datatable.gif"><img src="/img/post-images/datatable.gif" alt="" /></a></p>
+
+<p>By default, DataTable shows some small text when loading that is pretty easy to miss. I wanted to give the users a harder to miss indicator that something is going on while their data is loading. It also makes the whole process seem even faster because there’s no “Hey I clicked that column to sort, but nothing is happening.” It gives the user a visual cue that something <em>is</em> happening and tells them when it’s done.</p>
+
+<p>Luckily, DataTable also gives you a really easy class to hook into when it’s loading. It unhides a div with the class <code class="highlight">.dataTables_processing</code> anytime it’s loading. From that, it was easy to just add on the awesome CSS-only spinner I got <a href="http://codepen.io/MattIn4D/pen/LiKFC">here</a></p>
+
+<hr />
+
+<h2 id="displaying-data-in-calendar-form">2. Displaying data in calendar form.</h2>
+
+<p><a href="http://fullcalendar.io/">FullCalendar</a> is a great jQuery plugin for displaying events on a calendar. It’s very versatile and easy to use. You can get it wrapped up for rails in <a href="https://github.com/bokmann/fullcalendar-rails">this gem</a>. I also got some inspiration and direction from reading the source of the <a href="https://github.com/vinsol/fullcalendar-rails-engine">fullcalendar-rails-engine</a>. I didn’t need all that it had to offer since I already had my own way of managing events and times. It did however get me started on using the AJAX functionality of FullCalendar.</p>
+
+<p>FullCalendar handles JSON feeds easily <a href="http://fullcalendar.io/docs/event_data/events_json_feed/">http://fullcalendar.io/docs/event_data/events_json_feed/</a>. So all I needed to do was give it some events in JSON to put on the calendar.</p>
+
+<p>It’s as easy as giving the url that hits this controller method as the event source to FullCalendar:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">get_time_slots</span>
+  <span class="n">start_at</span> <span class="o">=</span> <span class="n">parse_time_param</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:start</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">end_at</span>   <span class="o">=</span> <span class="n">parse_time_param</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:end</span><span class="o">]</span><span class="p">)</span>
+
+  <span class="n">collect_time_slots</span><span class="p">(</span><span class="n">start_at</span><span class="p">,</span> <span class="n">end_at</span><span class="p">)</span>
+
+  <span class="n">formatted_time_slots</span> <span class="o">=</span> <span class="n">build_formatted_time_slots</span>
+  <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="n">formatted_time_slots</span><span class="o">.</span><span class="n">to_json</span>
+
+<span class="k">end</span></code></pre></div>
+
+<p>To get the time_slots (the model used in our app to represent anything dealing with time) in a certain range, I pushed the work down to the database using this scope:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">scope</span> <span class="ss">:in_time_range</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">start_at</span><span class="p">,</span> <span class="n">end_at</span><span class="p">)</span> <span class="p">{</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;</span>
+<span class="s1">      (start_time &gt;= :start_at and end_time &lt;= :end_at) or</span>
+<span class="s1">      (start_time &gt;= :start_at and end_time &gt; :end_at and start_time &lt;= :end_at) or</span>
+<span class="s1">      (start_time &lt;= :start_at and end_time &gt;= :start_at and end_time &lt;= :end_at) or</span>
+<span class="s1">      (start_time &lt;= :start_at and end_time &gt; :end_at)&#39;</span><span class="p">,</span>
+      <span class="ss">start_at</span><span class="p">:</span> <span class="n">start_at</span><span class="p">,</span> <span class="ss">end_at</span><span class="p">:</span> <span class="n">end_at</span><span class="p">)}</span></code></pre></div>
+
+<p>Then once I had the time_slots collected, I formatted them so that FullCalendar could understand them using a method similar to this:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">build_formatted_availability_time_slot</span><span class="p">(</span><span class="n">raw_time_slot</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">raw_time_slot</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="ss">start</span><span class="p">:</span> <span class="n">raw_time_slot</span><span class="o">.</span><span class="n">start_time</span><span class="o">.</span><span class="n">in_time_zone</span><span class="p">(</span><span class="n">get_time_zone</span><span class="p">)</span><span class="o">.</span><span class="n">iso8601</span><span class="p">,</span>
+    <span class="k">end</span><span class="p">:</span> <span class="n">raw_time_slot</span><span class="o">.</span><span class="n">end_time</span><span class="o">.</span><span class="n">in_time_zone</span><span class="p">(</span><span class="n">get_time_zone</span><span class="p">)</span><span class="o">.</span><span class="n">iso8601</span><span class="p">,</span>
+    <span class="ss">url</span><span class="p">:</span> <span class="n">edit_time_slot_path</span><span class="p">(</span><span class="n">raw_time_slot</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
+    <span class="ss">title</span><span class="p">:</span> <span class="s1">&#39;Lesson Availability&#39;</span><span class="p">,</span>
+    <span class="ss">textColor</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="ss">color</span><span class="p">:</span> <span class="s1">&#39;#31b0d5&#39;</span>
+  <span class="p">}</span>
+<span class="k">end</span></code></pre></div>
+
+<p>Finally I just render that result as JSON and FullCalendar handles the rest of the work of actually showing the events on a calendar. This process again allows the user to see all of the events on their calendar as far back or as far forward as they want without ever loading more than a month at any one time. This keeps the pages very fast, as opposed to loading all the events at once.</p>
+
+<h4 id="loading-indicator-1">Loading indicator</h4>
+
+<p>FullCalendar doesn’t having a loading indicator built in, but it’s really easy to add one. All you have to do is add a div right above your calendar like this:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;calendar-loading&quot;</span> <span class="na">style=</span><span class="s">&quot;display: none;&quot;</span><span class="nt">&gt;&lt;/div&gt;</span></code></pre></div>
+
+<p>and then add this to your FullCalendar JavaScript:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">loading</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">bool</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#calendar-loading&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+  <span class="k">else</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#calendar-loading&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Now you have a div that shows when the FullCalendar is loading, and hides when it is not. I just use that same <a href="http://codepen.io/MattIn4D/pen/LiKFC">CSS-Spinner</a> as my loading indicator.</p>
+
+<p><a href="/img/post-images/fullcalendar.gif"><img src="/img/post-images/fullcalendar.gif" alt="" /></a></p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>I needed to display thousands of rows of data in a table and thousands of events on a calendar. I tried using <a href="http://edgeguides.rubyonrails.org/caching_with_rails.html">caching</a> but the first (uncached) load of the page was still too expensive with that amount of data to display. Pushing all of the sorting and searching to the database and then using AJAX and jQuery to render the data helped speed up our pages incredibly.</p>
+
+<p>So if you need to display data in table form, check out <a href="http://www.datatables.net/">DataTables</a> and the <a href="https://github.com/antillas21/ajax-datatables-rails">ajax-datatables-rails gem</a>. If you need to display data in calendar form, check out <a href="http://fullcalendar.io/">FullCalendar</a> and its AJAX functionality.</p>
+
+						</article>
+
+					</div><!-- post-area -->
+
+					<div class="meta-social">
+  <ul class="inline center">
+    <li><a href="https://twitter.com/intent/tweet?text=2%20Easy%20Ways%20to%20Display%20Lots%20of%20Data%20Faster%20in%20a%20Rails%20App&amp;url=/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/&amp;via=mebezac" class="twitter-share border-box" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u=/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/" class="facebook-share border-box" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+    <li><a href="https://plus.google.com/share?url=/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/" class="pinterest-share border-box" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a></li>
+  </ul>
+</div>
+
+					<hr />
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'zacimblog';
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+					<div class="related clear-after">
+						<h4>Recent Posts</h4>
+						
+							<div class="item ">
+								<figure><img src="/img/post-images/faster_square.jpg" alt=""></figure>
+								<a class="overlay" href="/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/">
+									<div class="overlay-content">
+										<div class="post-type"><i class="icon icon-doc"></i></div>
+										<h2>2 Easy Ways to Display Lots of Data Faster in a Rails App</h2>
+										<p>Rendering views is <em>almost</em> always the slowest part of a rails app. The more data you need to display, the more rendering needs to take place, the slo...</p>
+									</div><!-- overlay-content -->
+								</a><!-- overlay -->
+							</div>
+						
+							<div class="item ">
+								<figure><img src="/img/jekyll-square.jpg" alt=""></figure>
+								<a class="overlay" href="/2015/02/06/switched-from-wordpress-to-jekyll/">
+									<div class="overlay-content">
+										<div class="post-type"><i class="icon icon-doc"></i></div>
+										<h2>I switched from Wordpress to Jekyll</h2>
+										<p>So, it's been a really long time (<em>like a really, really long time</em>) since I've posted, or updated this site at all. Basically it's been because I hav...</p>
+									</div><!-- overlay-content -->
+								</a><!-- overlay -->
+							</div>
+						
+							<div class="item last">
+								<figure><img src="/img/tds-teaser.png" alt=""></figure>
+								<a class="overlay" href="/2014/04/28/building-that-dont-suck-a-rails-app-from-scratch-sneak-peak-at-the-ui/">
+									<div class="overlay-content">
+										<div class="post-type"><i class="icon icon-doc"></i></div>
+										<h2>Building That Don't Suck (a rails app) from scratch. Sneak Peak at the UI.</h2>
+										<p>So, now that I'm done learning how to build Rails apps, it's time to use my knowledge to build some real applications. The first project I've chosen to work ...</p>
+									</div><!-- overlay-content -->
+								</a><!-- overlay -->
+							</div>
+						
+					</div>
+
+
+				</div><!-- row-content -->
+			</div><!-- row -->
+		</main><!-- main -->
+
+		<footer role="contentinfo">
+  <div class="row">
+    <div class="row-content buffer clear-after">
+      <section id="top-footer">
+        <div class="widget column three">
+        </div>
+        <div class="widget column three">
+          <h4>Menu</h4>
+          <ul class="plain">
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/resume">Resume</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="widget meta-social column three">
+          <h4>Connect</h4>
+          <ul class="inline">
+             <li><a href="https://twitter.com/mebezac" class="twitter-share border-box" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li> 
+             <li><a href="https://github.com/mebezac" class="github-share border-box" target="_blank"><i class="fa fa-github fa-lg"></i></a></li> 
+          </ul>
+        </div>
+      </section><!-- top-footer -->
+      <section id="bottom-footer">
+        <p class="centertxt">2015 <a href="">Zac Clay</a> powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a>. All Rights Reserved.</p>
+        <p class="keep-right"></p>
+      </section><!-- bottom-footer -->
+    </div><!-- row-content -->
+  </div><!-- row -->
+</footer>
+
+		<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/beetle.js"></script>
+
+	</body>
+
+</html>

@@ -118,9 +118,9 @@ contacts to a CSV. Some users have upwards of 3,000 contacts, so exporting conta
     <span class="k">end</span>
 
     <span class="n">file</span> <span class="o">=</span> <span class="no">StringIO</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
-    <span class="n">foo</span><span class="o">.</span><span class="n">last_csv</span> <span class="o">=</span> <span class="n">file</span>
-    <span class="n">foo</span><span class="o">.</span><span class="n">last_csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:content_type</span><span class="p">,</span> <span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
-    <span class="n">foo</span><span class="o">.</span><span class="n">last_csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:file_name</span><span class="p">,</span> <span class="n">make_filename</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
+    <span class="n">foo</span><span class="o">.</span><span class="n">csv</span> <span class="o">=</span> <span class="n">file</span>
+    <span class="n">foo</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:content_type</span><span class="p">,</span> <span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
+    <span class="n">foo</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:file_name</span><span class="p">,</span> <span class="n">make_filename</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
     <span class="n">foo</span><span class="o">.</span><span class="n">save!</span>
 
   <span class="k">end</span>
@@ -129,9 +129,9 @@ contacts to a CSV. Some users have upwards of 3,000 contacts, so exporting conta
 <p>The first part of that method generates the CSV, which is really just a big string. The second part of the method is:</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">file</span> <span class="o">=</span> <span class="no">StringIO</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">last_csv</span> <span class="o">=</span> <span class="n">file</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">last_csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:content_type</span><span class="p">,</span> <span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">last_csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:file_name</span><span class="p">,</span> <span class="n">make_filename</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">csv</span> <span class="o">=</span> <span class="n">file</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:content_type</span><span class="p">,</span> <span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">instance_write</span><span class="p">(</span><span class="ss">:file_name</span><span class="p">,</span> <span class="n">make_filename</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
 <span class="n">foo</span><span class="o">.</span><span class="n">save!</span></code></pre></div>
 
 <p>That part takes the big string part of the CSV, turns into a <a href="http://ruby-doc.org/stdlib-2.2.0.preview1/libdoc/stringio/rdoc/StringIO.html">pseudo I/O</a> that Paperclip can attach to the model and upload to S3.</p>
@@ -142,7 +142,7 @@ contacts to a CSV. Some users have upwards of 3,000 contacts, so exporting conta
   <span class="k">def</span> <span class="nf">download_csv</span>
     <span class="n">foo</span> <span class="o">=</span> <span class="no">Foo</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">send_data</span> <span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">,</span> <span class="ss">filename</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">foo</span><span class="o">.</span><span class="n">last_csv_file_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="s2">&quot;text/csv&quot;</span><span class="p">,</span> <span class="ss">disposition</span><span class="p">:</span> <span class="s1">&#39;attachment&#39;</span>
+    <span class="n">send_data</span> <span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">,</span> <span class="ss">filename</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">foo</span><span class="o">.</span><span class="n">csv_file_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="s2">&quot;text/csv&quot;</span><span class="p">,</span> <span class="ss">disposition</span><span class="p">:</span> <span class="s1">&#39;attachment&#39;</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></div>
 

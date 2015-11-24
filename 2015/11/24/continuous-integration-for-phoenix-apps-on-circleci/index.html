@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="The Page Description">
   <style type="text/css">@-ms-viewport{width: device-width;}</style>
-  <title>Building That Don't Suck (a rails app) from scratch. Sneak Peak at the UI. • Zac Clay</title>
+  <title>Continuous Integration for Phoenix Apps on CircleCI • Zac Clay</title>
   <link rel="stylesheet" href="/css/main.css" media="screen">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" media="screen">
   <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
@@ -63,9 +63,9 @@
 			
 				<div id="intro-wrap">
 	        <div id="intro" class="preload darken more-button">
-	          <div class="intro-item" style="background-image: url(/img/pat.jpg);">
+	          <div class="intro-item" style="background-image: url(/img/post-images/conveyor_belt.jpg);">
 	            <div class="caption">
-	              <h2>Building That Don't Suck (a rails app) from scratch. Sneak Peak at the UI.</h2>
+	              <h2>Continuous Integration for Phoenix Apps on CircleCI</h2>
 	            </div><!-- caption -->
 	          </div>
 	        </div><!-- intro -->
@@ -77,32 +77,55 @@
 					<div id="post-nav">
 						<ul class="clear-after reset plain">
 							
-								<li id="prev-items" class="post-nav"><a href="/2014/04/25/tealeaf-academy-review/"><i class="fa fa-chevron-left"></i><span class="label">Prev</span></a></li>
+								<li id="prev-items" class="post-nav"><a href="/2015/03/22/export-csv-and-attach-to-model-with-paperclip/"><i class="fa fa-chevron-left"></i><span class="label">Prev</span></a></li>
 							
 							<li id="all-items" class="post-nav"><a href="/blog"><i class="icon icon-images"></i></a></li>
-							
-								<li id="next-items" class="post-nav"><a href="/2015/02/06/switched-from-wordpress-to-jekyll/"><span class="label">Next</span><i class="fa fa-chevron-right"></i></a></li>
 							
 						</ul>
 					</div>
 
 					<div class="post-area clear-after">
 						<article role="main">
-							<h5 class="meta-post"><time datetime="2014-04-28T15:03:58Z" itemprop="datePublished">April 28, 2014</time></p></h5>
-							<h1>Building That Don't Suck (a rails app) from scratch. Sneak Peak at the UI.</h1>
-							<p>So, now that I’m done learning how to build Rails apps, it’s time to use my knowledge to build some real applications. The first project I’ve chosen to work on is called That Don’t Suck. Basically, the idea for the website is a community of people that help each other find things that don’t suck.</p>
+							<h5 class="meta-post"><time datetime="2015-11-24T08:25:42Z" itemprop="datePublished">November 24, 2015</time></p></h5>
+							<h1>Continuous Integration for Phoenix Apps on CircleCI</h1>
+							<p>I just recently got turned on to <a href="http://elixir-lang.org/">Elixir</a> and <a href="http://www.phoenixframework.org/">Phoenix</a>. I decided to play around and write a small, silly app that would function as a sort of bot for my company’s Slack team. There are a handful of specs, and I wanted to be able use Continuous Integration to run those specs for me.</p>
 
-<p>For example, when designing websites for people, one of the things that is really hard to find is free stock photos that don’t suck. I could login to That Don’t Suck and first search to see if that topic exists yet. If it does, I can start looking through the suggestions people have added already. If not, I can add the topic and ask people to make suggestions for me.</p>
+<p>I tried using Travis CI first with their <a href="https://docs.travis-ci.com/user/languages/elixir/">instructions</a> for running Elixir projects. I left it with the default settings which uses Elixir 1.0.2 and Erlang/OTP 17.4. It failed because my project needed Elixir &gt;= 1.1.0, namely because it uses <code>Enum.random/1</code>. <a href="https://travis-ci.org/mebezac/lunchify/builds/92854536">My Travis build</a></p>
 
-<p>Once people have made some suggestions, I, and other people looking at the suggestions can vote and comment on each one. The one with the most votes will be at the top so people can easily see which one the community suggests.</p>
+<p>Then I tried to install Erlang/OTP 18 and Elixir 1.1.1 on Travis CI, but it just timed out. <a href="https://travis-ci.org/mebezac/lunchify/builds/92856484">Timed out build</a>.</p>
 
-<p>There’s also a bunch of other features I will be adding, such as a notification system, social networking, gamification through points and badges, full text search, and more.  Right now, though I am focused on getting the UI looking the way I want it to. This is because, once I have the UI set up, I can then focus on building up the functionality without worrying about the look and feel quite as much since that is already taken care of. Also, forcing myself to create mockups of all the features beforehand helps me organize all the features I am looking to add so I can start thinking about the different pieces I am going to need and the best way to put those into the models and controllers.</p>
+<p>So, I gave up on Travis CI and decided to try CircleCI instead. I based my <code>circle.yml</code> file on instructions from <a href="https://archives.kevin.disneur.me/2015-06-14-elixir-on-circleci.html">Kevin Disneur</a> and <a href="https://discuss.circleci.com/t/building-elixir-projects/21">goneflyin</a>. Neither of their instructions worked 100% for me, but in combining the two, I was able to get my specs to run on CircleCI!</p>
 
-<p>For the UI, I decided to use Twitter Bootstrap since it allows you to create a pretty attractive UI without much heavy lifting on your part. I am using the <a href="http://bootswatch.com/darkly/">Darkly</a> Bootstrap theme from Bootswatch because you still have all the functionality of Bootstrap without looking quite as generic and boring as the plain vanilla version.</p>
+<p>This configuration uses <a href="https://github.com/HashNuke/asdf">asdf</a> a multi-language version manager.<br />
+To set the Erlang/OTP and Elixir versions, just add a <code>.tool-versions</code> file at the root of your project. My file looks like this:</p>
 
-<p><a href="http://www.zac.im/img/TDS-2014-04-28.png"><img src="http://www.zac.im/img/TDS-2014-04-28-300x150.png" alt="" /></a></p>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">erlang 18.0</span>
+<span class="l-Scalar-Plain">elixir 1.1.1</span></code></pre></div>
 
-<p>The UI is pretty much done now, so I will now move on to the fun part, adding real functionality to the project! I will be using TDD to drive the implementation of my code. I’ll try to update at least once a week about my progress and share any tips I might stumble upon.</p>
+<p>Once you have that file, all you need is a <code>circle.yml</code> file to tell CircleCI what to do.</p>
+
+<h2 id="my-circleyml-file">My <code>circle.yml</code> file</h2>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">machine</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">environment</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">PATH</span><span class="p-Indicator">:</span> <span class="s">&quot;$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH&quot;</span>
+
+<span class="-Error">  </span><span class="l-Scalar-Plain">dependencies</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">cache_directories</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">~/.asdf</span>
+    <span class="l-Scalar-Plain">pre</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">if ! asdf | grep version; then git clone https://github.com/HashNuke/asdf.git ~/.asdf; fi</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">asdf plugin-add erlang https://github.com/HashNuke/asdf-erlang.git</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">asdf plugin-add elixir https://github.com/HashNuke/asdf-elixir.git</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">erlang_version=$(awk &#39;/erlang/ { print $2 }&#39; .tool-versions) &amp;&amp; asdf install erlang ${erlang_version}</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">elixir_version=$(awk &#39;/elixir/ { print $2 }&#39; .tool-versions) &amp;&amp; asdf install elixir ${elixir_version}</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">yes | mix deps.get</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mix local.rebar</span>
+  <span class="l-Scalar-Plain">test</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">override</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mix test</span></code></pre></div>
+
+<p>The first run will take significantly longer than subsequent runs as the Erlang/OTP and Elixir installations are not yet cached. My first run took around 9 minutes, whereas my second run took a little over 2 minutes.</p>
 
 						</article>
 
@@ -110,9 +133,9 @@
 
 					<div class="meta-social">
   <ul class="inline center">
-    <li><a href="https://twitter.com/intent/tweet?text=Building%20That%20Don&#39;t%20Suck%20(a%20rails%20app)%20from%20scratch.%20Sneak%20Peak%20at%20the%20UI.&amp;url=http://www.zac.im/2014/04/28/building-that-dont-suck-a-rails-app-from-scratch-sneak-peak-at-the-ui/&amp;via=mebezac" class="twitter-share border-box" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
-    <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://www.zac.im/2014/04/28/building-that-dont-suck-a-rails-app-from-scratch-sneak-peak-at-the-ui/" class="facebook-share border-box" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
-    <li><a href="https://plus.google.com/share?url=http://www.zac.im/2014/04/28/building-that-dont-suck-a-rails-app-from-scratch-sneak-peak-at-the-ui/" class="pinterest-share border-box" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a></li>
+    <li><a href="https://twitter.com/intent/tweet?text=Continuous%20Integration%20for%20Phoenix%20Apps%20on%20CircleCI&amp;url=http://www.zac.im/2015/11/24/continuous-integration-for-phoenix-apps-on-circleci/&amp;via=mebezac" class="twitter-share border-box" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://www.zac.im/2015/11/24/continuous-integration-for-phoenix-apps-on-circleci/" class="facebook-share border-box" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+    <li><a href="https://plus.google.com/share?url=http://www.zac.im/2015/11/24/continuous-integration-for-phoenix-apps-on-circleci/" class="pinterest-share border-box" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a></li>
   </ul>
 </div>
 

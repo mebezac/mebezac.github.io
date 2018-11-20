@@ -38,7 +38,7 @@
         
           <description>Rendering views is &lt;em&gt;almost&lt;/em&gt; always the slowest part of a rails app. The more data you need to display, the more rendering needs to take place, the slower the app loads. This post is going to show you how to use a couple tools to display lots of data in a rails app in a faster way.</description>
         
-        <pubDate>Wed, 11 Mar 2015 19:53:58 -0400</pubDate>
+        <pubDate>Wed, 11 Mar 2015 18:53:58 -0500</pubDate>
         <link>
         http://www.zac.pizza/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/</link>
         <guid isPermaLink="true">http://www.zac.pizza/2015/03/11/2-easy-ways-to-display-lots-of-data-faster-in-a-rails-app/</guid>
@@ -181,7 +181,7 @@
         
           <description>This week was really great for me. I think I am really starting to get the hang of the testing process and test driven design. In the first week and for most the of the first half of this week, I had to kind of hobble along, not writing much code before taking a look at the solution videos. I had an idea of what I needed to do, but I didn&#39;t really know exactly how to do it.</description>
         
-        <pubDate>Sat, 22 Mar 2014 10:31:15 -0400</pubDate>
+        <pubDate>Sat, 22 Mar 2014 09:31:15 -0500</pubDate>
         <link>
         http://www.zac.pizza/2014/03/22/finished-week-2-of-course-3-at-tealeaf-academy/</link>
         <guid isPermaLink="true">http://www.zac.pizza/2014/03/22/finished-week-2-of-course-3-at-tealeaf-academy/</guid>
@@ -194,7 +194,7 @@
         
           <description>So it took a little longer than a week, but I have finished up the first &quot;week&quot; of course 3 at Tealeaf. This course focuses on Test Driven Development (TDD) and the main project is building a NetFlix clone.</description>
         
-        <pubDate>Tue, 18 Mar 2014 14:21:55 -0400</pubDate>
+        <pubDate>Tue, 18 Mar 2014 13:21:55 -0500</pubDate>
         <link>
         http://www.zac.pizza/2014/03/18/finished-with-week-1-of-course-3-at-tealeaf-accademy/</link>
         <guid isPermaLink="true">http://www.zac.pizza/2014/03/18/finished-with-week-1-of-course-3-at-tealeaf-accademy/</guid>
